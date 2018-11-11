@@ -7,11 +7,11 @@ CREATE TABLE mytable(
   ,City          VARCHAR(11) NOT NULL
   ,Tariff        NUMERIC(6,1) NOT NULL
   ,Max_Occupants INTEGER  NOT NULL
-  ,City_View     BIT  NOT NULL
-  ,Comp_BF       BIT  NOT NULL
-  ,WiFi          BIT  NOT NULL
-  ,Car_Rental    BIT  NOT NULL
-  ,AC            BIT  NOT NULL
+  ,City_View     INTEGER  NOT NULL
+  ,Comp_BF       INTEGER  NOT NULL
+  ,WiFi          INTEGER  NOT NULL
+  ,Car_Rental    INTEGER  NOT NULL
+  ,AC            INTEGER  NOT NULL
 );
 INSERT INTO mytable(Room_ID,Hotel_ID,Hotel_Name,Address,Room_Number,City,Tariff,Max_Occupants,City_View,Comp_BF,WiFi,Car_Rental,AC) VALUES (1,1,'Taj Intercontinental','B-35/1, Race Course Road, South Bombay, Memapur',101,'Mumbai',32300,3,0,1,1,1,1);
 INSERT INTO mytable(Room_ID,Hotel_ID,Hotel_Name,Address,Room_Number,City,Tariff,Max_Occupants,City_View,Comp_BF,WiFi,Car_Rental,AC) VALUES (2,1,'Taj Intercontinental','B-35/1, Race Course Road, South Bombay, Memapur',103,'Mumbai',12000,3,0,1,1,1,1);
