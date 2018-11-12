@@ -12,6 +12,8 @@ CREATE TABLE room_info(
   ,WiFi          INTEGER  NOT NULL
   ,Car_Rental    INTEGER  NOT NULL
   ,AC            INTEGER  NOT NULL
+  ,Average_Rating DECIMAL(5,1)
+  ,Number_of_ratings INTEGER
 );
 INSERT INTO room_info(Room_ID,Hotel_ID,Hotel_Name,Address,Room_Number,City,Tariff,Max_Occupants,City_View,Comp_BF,WiFi,Car_Rental,AC) VALUES (1,1,'Taj Intercontinental','B-35/1, Race Course Road, South Bombay, Memapur',101,'Mumbai',32300,3,0,1,1,1,1);
 INSERT INTO room_info(Room_ID,Hotel_ID,Hotel_Name,Address,Room_Number,City,Tariff,Max_Occupants,City_View,Comp_BF,WiFi,Car_Rental,AC) VALUES (2,1,'Taj Intercontinental','B-35/1, Race Course Road, South Bombay, Memapur',103,'Mumbai',12000,3,0,1,1,1,1);
