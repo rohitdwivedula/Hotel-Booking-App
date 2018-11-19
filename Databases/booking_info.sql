@@ -1,8 +1,9 @@
 CREATE TABLE booking_info(
 Booking_ID INT NOT NULL,
-username VARCHAR(255) NOT NULL, ,
+username VARCHAR(255) NOT NULL,
 Hotel_ID INT NOT NULL,
-Number_of_rooms INT NOT NULL,
+rooms_confirmed INT NOT NULL,
+rooms_waitlist INT NOT NULL,
 Date_In DATE NOT NULL,
 Date_Out DATE NOT NULL,
 ID_Type VARCHAR(24),
