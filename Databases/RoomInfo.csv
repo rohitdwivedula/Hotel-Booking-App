@@ -1,127 +1,28 @@
-Room_ID,Hotel ID,Hotel_Name,Address,Room_Number,City,Tariff,Max_Occupants,City_View,Comp_BF,WiFi,Car_Rental,AC
-1,1,Taj Intercontinental,"B-35/1, Race Course Road, South Bombay, Memapur",101,Mumbai,32300,3,0,1,1,1,1
-2,1,Taj Intercontinental,"B-35/1, Race Course Road, South Bombay, Memapur",103,Mumbai,12000,3,0,1,1,1,1
-3,1,Taj Intercontinental,"B-35/1, Race Course Road, South Bombay, Memapur",332,Mumbai,9500,3,0,1,1,1,1
-4,1,Taj Intercontinental,"B-35/1, Race Course Road, South Bombay, Memapur",201,Mumbai,9500,3,0,1,1,1,1
-5,1,Taj Intercontinental,"B-35/1, Race Course Road, South Bombay, Memapur",401,Mumbai,9500,3,1,1,1,1,1
-6,2,Hotel Bhimas,"High Court Road, Nyay Marg, Townie Central, Navi Mumbai",124,Mumbai,8700,3,0,1,1,0,1
-7,2,Hotel Bhimas,"High Court Road, Nyay Marg, Townie Central, Navi Mumbai",332,Mumbai,9990,3,0,1,1,0,1
-8,2,Hotel Bhimas,"High Court Road, Nyay Marg, Townie Central, Navi Mumbai",445,Mumbai,8700,3,1,1,1,0,1
-9,2,Hotel Bhimas,"High Court Road, Nyay Marg, Townie Central, Navi Mumbai",101,Mumbai,8700,3,0,1,1,0,1
-10,2,Hotel Bhimas,"High Court Road, Nyay Marg, Townie Central, Navi Mumbai",201,Mumbai,8700,3,0,1,1,0,1
-11,2,Hotel Bhimas,"High Court Road, Nyay Marg, Townie Central, Navi Mumbai",202,Mumbai,8700,3,0,1,1,0,1
-12,3,Brigade Metropolis Plus,"Gulab Estate, T2 Terminal International Airport, MTNL Road, Sakinaka, Andheri, Mumbai, Maharashtra 400072",101,Mumbai,10249,2,0,1,1,0,1
-13,3,Brigade Metropolis Plus,"Gulab Estate, T2 Terminal International Airport, MTNL Road, Sakinaka, Andheri",110,Mumbai,10250,2,0,1,1,0,1
-14,3,Brigade Metropolis Plus,"Gulab Estate, T2 Terminal International Airport, MTNL Road, Sakinaka, Andheri, Mumbai, Maharashtra 400074",332,Mumbai,10251,3,0,1,1,0,1
-15,4,Oyo Manikantha 5166,"Gulab Estate, 8B, Sakinaka Tele Exchange Lane, T2 Airport Road, Sakinaka",101,Mumbai,3400,2,0,1,1,1,1
-16,4,Oyo Manikantha 5167,"Gulab Estate, 8B, Sakinaka Tele Exchange Lane, T2 Airport Road, Sakinaka",102,Mumbai,3400,2,0,1,1,1,1
-17,4,Oyo Manikantha 5168,"Gulab Estate, 8B, Sakinaka Tele Exchange Lane, T2 Airport Road, Sakinaka",103,Mumbai,3400,2,0,1,1,1,1
-18,4,Oyo Manikantha 5169,"Gulab Estate, 8B, Sakinaka Tele Exchange Lane, T2 Airport Road, Sakinaka",104,Mumbai,3400,2,0,1,1,1,1
-19,4,Oyo Manikantha 5170,"Gulab Estate, 8B, Sakinaka Tele Exchange Lane, T2 Airport Road, Sakinaka",105,Mumbai,3400,2,0,1,1,1,1
-20,4,Oyo Manikantha 5171,"Gulab Estate, 8B, Sakinaka Tele Exchange Lane, T2 Airport Road, Sakinaka",332,Mumbai,3400,2,0,1,1,1,1
-21,4,Oyo Manikantha 5172,"Gulab Estate, 8B, Sakinaka Tele Exchange Lane, T2 Airport Road, Sakinaka",445,Mumbai,3400,2,1,1,1,1,1
-22,5,Hotel Grandeur,"Crystal Plaza Plot N0.18/27, Sector 7 Kharghar, Navi Mumbai",202,Mumbai,4500,2,0,1,1,0,1
-23,5,Hotel Grandeur,"Crystal Plaza Plot N0.18/27, Sector 7 Kharghar, Navi Mumbai",204,Mumbai,4500,2,0,1,1,0,1
-24,5,Hotel Grandeur,"Crystal Plaza Plot N0.18/27, Sector 7 Kharghar, Navi Mumbai",311,Mumbai,4500,2,0,1,1,0,1
-25,5,Hotel Grandeur,"Crystal Plaza Plot N0.18/27, Sector 7 Kharghar, Navi Mumbai",332,Mumbai,4500,2,0,1,1,0,1
-26,5,Hotel Grandeur,"Crystal Plaza Plot N0.18/27, Sector 7 Kharghar, Navi Mumbai",607,Mumbai,4500,2,1,1,1,0,1
-27,6,Hotel Sitara,"VM-123/4, Gandhi Road, opposite BSNL Bhawan, Kotagummam",332,Rajahmundry,1250,2,0,0,1,0,1
-28,6,Hotel Sitara,"VM-123/4, Gandhi Road, opposite BSNL Bhawan, Kotagummam",333,Rajahmundry,1700,3,0,0,1,0,1
-29,6,Hotel Sitara,"VM-123/4, Gandhi Road, opposite BSNL Bhawan, Kotagummam",335,Rajahmundry,1250,2,0,0,1,0,1
-30,6,Hotel Sitara,"VM-123/4, Gandhi Road, opposite BSNL Bhawan, Kotagummam",101,Rajahmundry,1250,2,0,0,1,0,1
-31,6,Hotel Sitara,"VM-123/4, Gandhi Road, opposite BSNL Bhawan, Kotagummam",105,Rajahmundry,1250,2,0,0,1,0,1
-32,6,Hotel Sitara,"VM-123/4, Gandhi Road, opposite BSNL Bhawan, Kotagummam",109,Rajahmundry,1270,2,0,0,1,0,1
-33,6,Hotel Sitara,"VM-123/4, Gandhi Road, opposite BSNL Bhawan, Kotagummam",111,Rajahmundry,1300,2,0,0,1,0,1
-34,7,Geetha Apsara Residemcy,"Danavaipeta, opposite Anand Regancy Theatre",205,Rajahmundry,940,2,0,0,0,1,0
-35,7,Geetha Apsara Residemcy,"Danavaipeta, opposite Anand Regancy Theatre",209,Rajahmundry,940,2,0,0,0,1,0
-36,7,Geetha Apsara Residemcy,"Danavaipeta, opposite Anand Regancy Theatre",102,Rajahmundry,1300,3,0,0,1,1,0
-37,7,Geetha Apsara Residemcy,"Danavaipeta, opposite Anand Regancy Theatre",332,Rajahmundry,940,2,0,0,0,1,0
-38,7,Geetha Apsara Residemcy,"Danavaipeta, opposite Anand Regancy Theatre",104,Rajahmundry,940,2,0,0,0,1,0
-39,7,Geetha Apsara Residemcy,"Danavaipeta, opposite Anand Regancy Theatre",203,Rajahmundry,940,2,0,0,0,1,0
-40,7,Geetha Apsara Residemcy,"Danavaipeta, opposite Anand Regancy Theatre",301,Rajahmundry,940,2,0,0,0,1,0
-41,8,Shelton Grand,"26-3-7, Jampet, NAD Road",301,Rajahmundry,2400,2,0,0,1,0,1
-42,8,Shelton Grand,"27-3-7, Jampet, NAD Road",307,Rajahmundry,2400,2,0,0,1,0,1
-43,8,Shelton Grand,"28-3-7, Jampet, NAD Road",332,Rajahmundry,3040,3,0,1,1,0,1
-44,8,Shelton Grand,"29-3-7, Jampet, NAD Road",407,Rajahmundry,2550,2,1,1,1,0,1
-45,8,Shelton Grand,"30-3-7, Jampet, NAD Road",502,Rajahmundry,2400,2,1,0,1,0,1
-46,8,Shelton Grand,"31-3-7, Jampet, NAD Road",504,Rajahmundry,2350,2,1,0,1,0,1
-47,8,Shelton Grand,"32-3-7, Jampet, NAD Road",511,Rajahmundry,2400,2,1,0,1,0,1
-48,9,Udipi Akshaya,"NH-162, Bobbaralanka Nagar, near Kadiyam",201,Rajahmundry,1300,2,0,0,1,0,1
-49,9,Udipi Akshaya,"NH-162, Bobbaralanka Nagar, near Kadiyam",203,Rajahmundry,1300,2,0,0,1,0,1
-50,9,Udipi Akshaya,"NH-162, Bobbaralanka Nagar, near Kadiyam",332,Rajahmundry,1450,3,0,0,1,0,1
-51,9,Udipi Akshaya,"NH-162, Bobbaralanka Nagar, near Kadiyam",301,Rajahmundry,1300,2,0,0,1,0,1
-52,9,Udipi Akshaya,"NH-162, Bobbaralanka Nagar, near Kadiyam",401,Rajahmundry,1300,2,1,0,1,0,1
-53,10,Satya Homestay,"Maisamma Chaurassa Circle, Near Satyam Brewing Agencies, NTPL Road",101,Rajahmundry,450,1,0,0,0,1,0
-54,10,Satya Homestay,"Maisamma Chaurassa Circle, Near Satyam Brewing Agencies, NTPL Road",104,Rajahmundry,450,1,0,0,0,1,0
-55,10,Satya Homestay,"Maisamma Chaurassa Circle, Near Satyam Brewing Agencies, NTPL Road",332,Rajahmundry,450,1,0,0,0,1,0
-56,10,Satya Homestay,"Maisamma Chaurassa Circle, Near Satyam Brewing Agencies, NTPL Road",201,Rajahmundry,450,1,0,0,0,1,0
-57,11,La Hospin,"101-A/2, Raj Marg, New Delhi Capital Area (UT)",101,Delhi,3400,2,0,1,1,0,1
-58,11,La Hospin,"102-A/2, Raj Marg, New Delhi Capital Area (UT)",103,Delhi,3400,2,0,1,1,0,1
-59,11,La Hospin,"103-A/2, Raj Marg, New Delhi Capital Area (UT)",332,Delhi,3400,2,0,1,1,0,1
-60,12,Rafale Grand,"Door NM-101, Scamabad, Bharath Vihar Nagar, Gandhinagar",106,Delhi,8500,3,0,1,1,0,1
-61,12,Rafale Grand,"Door NM-101, Scamabad, Bharath Vihar Nagar, Gandhinagar",204,Delhi,8500,3,0,1,1,0,1
-62,12,Rafale Grand,"Door NM-101, Scamabad, Bharath Vihar Nagar, Gandhinagar",303,Delhi,8500,3,0,1,1,0,1
-63,12,Rafale Grand,"Door NM-101, Scamabad, Bharath Vihar Nagar, Gandhinagar",332,Delhi,8500,3,0,1,1,0,1
-64,13,Tempe Residency,"Wahi Bagh, Banega Nagar, Gurgaon-Delhi Religious Highway",101,Delhi,19250,4,0,1,1,1,1
-65,13,Tempe Residency,"Wahi Bagh, Banega Nagar, Gurgaon-Delhi Religious Highway",202,Delhi,19250,4,0,1,1,1,1
-66,13,Tempe Residency,"Wahi Bagh, Banega Nagar, Gurgaon-Delhi Religious Highway",303,Delhi,19250,4,0,1,1,1,1
-67,13,Tempe Residency,"Wahi Bagh, Banega Nagar, Gurgaon-Delhi Religious Highway",332,Delhi,19250,4,0,1,1,1,1
-68,14,Oyo 2020,"Vision Metropolis Complex, near AIIMS Delhi, Birla Nagar",301,Delhi,16020,4,0,1,1,0,1
-69,14,Oyo 2020,"Vision Metropolis Complex, near AIIMS Delhi, Birla Nagar",202,Delhi,15345,4,0,1,1,0,1
-70,14,Oyo 2020,"Vision Metropolis Complex, near AIIMS Delhi, Birla Nagar",202,Delhi,15250,4,0,1,1,0,1
-71,14,Oyo 2020,"Vision Metropolis Complex, near AIIMS Delhi, Birla Nagar",221,Delhi,15900,4,0,1,1,0,1
-72,14,Oyo 2020,"Vision Metropolis Complex, near AIIMS Delhi, Birla Nagar",332,Delhi,15260,4,0,1,1,0,1
-73,15,Hotel Unity,"G-101/A, Gandhi Road, MG Nagar",101,Vadodara,3300,2,0,1,1,0,1
-74,15,Hotel Unity,"G-101/A, Gandhi Road, MG Nagar",202,Vadodara,3300,2,0,1,1,0,1
-75,15,Hotel Unity,"G-101/A, Gandhi Road, MG Nagar",104,Vadodara,3300,2,0,1,1,0,1
-76,15,Hotel Unity,"G-101/A, Gandhi Road, MG Nagar",105,Vadodara,3300,2,0,1,1,0,1
-77,15,Hotel Unity,"G-101/A, Gandhi Road, MG Nagar",332,Vadodara,3300,2,0,1,1,0,1
-78,16,Democles Grand,"7, Jetalpur Rd, Sampatrao Colony, Alkapuri",102,Vadodara,2100,2,0,0,1,1,1
-79,16,Democles Grand,"7, Jetalpur Rd, Sampatrao Colony, Alkapuri",104,Vadodara,2100,2,0,0,1,1,1
-80,16,Democles Grand,"7, Jetalpur Rd, Sampatrao Colony, Alkapuri",201,Vadodara,2100,2,0,0,1,1,1
-81,16,Democles Grand,"7, Jetalpur Rd, Sampatrao Colony, Alkapuri",303,Vadodara,2050,2,0,0,1,1,1
-82,16,Democles Grand,"7, Jetalpur Rd, Sampatrao Colony, Alkapuri",401,Vadodara,2100,2,1,0,1,1,1
-83,17,Geass Residencies,"Layout 54-3/A, Sardar Vallabhai Nagar, Iron Man Road",101,Vadodara,2300,3,0,0,1,0,1
-84,17,Geass Residencies,"Layout 54-3/A, Sardar Vallabhai Nagar, Iron Man Road",103,Vadodara,1070,2,0,0,1,0,0
-85,17,Geass Residencies,"Layout 54-3/A, Sardar Vallabhai Nagar, Iron Man Road",105,Vadodara,1340,2,0,0,1,0,0
-86,17,Geass Residencies,"Layout 54-3/A, Sardar Vallabhai Nagar, Iron Man Road",107,Vadodara,1070,2,0,0,1,0,0
-87,17,Geass Residencies,"Layout 54-3/A, Sardar Vallabhai Nagar, Iron Man Road",209,Vadodara,980,2,0,0,0,0,0
-88,17,Geass Residencies,"Layout 54-3/A, Sardar Vallabhai Nagar, Iron Man Road",332,Hyderabad,1070,2,0,0,1,0,0
-89,18,Yagami Heights,"Comicon Road, Gacchibowli Area, opposite Light Avenue",506,Hyderabad,1400,3,1,0,1,0,1
-90,18,Yagami Heights,"Comicon Road, Gacchibowli Area, opposite Light Avenue",708,Hyderabad,990,2,1,0,0,0,1
-91,18,Yagami Heights,"Comicon Road, Gacchibowli Area, opposite Light Avenue",802,Hyderabad,990,2,1,0,0,0,1
-92,18,Yagami Heights,"Comicon Road, Gacchibowli Area, opposite Light Avenue",332,Hyderabad,975,2,0,0,0,0,1
-93,18,Yagami Heights,"Comicon Road, Gacchibowli Area, opposite Light Avenue",401,Hyderabad,1050,2,1,0,1,0,1
-94,19,"Valmiki Bhawan, BPHC","Shameerpet (de)Forested Area, near Jawaharnagar, Thumukunta",332,Hyderabad,130,2,0,0,0,1,0
-95,19,"Valmiki Bhawan, BPHC","Shameerpet (de)Forested Area, near Jawaharnagar, Thumukunta",330,Hyderabad,170,2,0,0,0,1,0
-96,19,"Valmiki Bhawan, BPHC","Shameerpet (de)Forested Area, near Jawaharnagar, Thumukunta",101,Hyderabad,145,2,0,0,0,1,0
-97,19,"Valmiki Bhawan, BPHC","Shameerpet (de)Forested Area, near Jawaharnagar, Thumukunta",220,Hyderabad,99,2,0,0,0,1,0
-98,20,Alankrita Holistic Resorts,"Middle of nowhere, Thumukunta, CRPF Highway – 500078",101,Hyderabad,5600,2,0,1,1,0,1
-99,20,Alankrita Holistic Resorts,"Middle of nowhere, Thumukunta, CRPF Highway – 500078",104,Hyderabad,5840,2,0,1,1,0,1
-100,21,Capital O Metropolis,"A90, Manikantha Marg, near SC Railway Station",102,Hyderabad,5800,2,0,1,1,0,1
-101,21,Capital O Metropolis,"A90, Manikantha Marg, near SC Railway Station",101,Hyderabad,6100,2,0,1,1,0,1
-102,21,Capital O Metropolis,"A90, Manikantha Marg, near SC Railway Station",332,Hyderabad,6050,2,0,1,1,0,1
-103,22,Nestlay Cafa,"New No. 6, Old No. 9, Plot No. 7, Zerald Garden, Second Lane, Casa Major Road, Egmore",110,Chennai,4890,2,0,1,1,1,1
-104,22,Nestlay Cafa,"New No. 6, Old No. 9, Plot No. 7, Zerald Garden, Second Lane, Casa Major Road, Egmore",202,Chennai,4990,2,0,1,1,1,1
-105,22,Nestlay Cafa,"New No. 6, Old No. 9, Plot No. 7, Zerald Garden, Second Lane, Casa Major Road, Egmore",332,Chennai,5040,2,0,1,1,1,1
-106,23,Regentra Central,"36, Royapettah High Rd, Jagadambal colony, Sripuram, Teachers Colony, Royapettah",332,Chennai,7090,2,0,1,1,0,1
-107,23,Regentra Central,"37, Royapettah High Rd, Jagadambal colony, Sripuram, Teachers Colony, Royapettah",303,Chennai,6500,2,0,1,1,0,1
-108,23,Regentra Central,"38, Royapettah High Rd, Jagadambal colony, Sripuram, Teachers Colony, Royapettah",401,Chennai,6980,2,1,1,1,0,1
-109,24,Ulli Residency,"Rama Pillai Street,Jawaharlal nehru Stadium, Periyamet",403,Chennai,7100,2,1,1,1,0,1
-110,24,Ulli Residency,"Rama Pillai Street,Jawaharlal nehru Stadium, Periyamet",404,Chennai,7300,2,1,1,1,0,1
-111,24,Ulli Residency,"Rama Pillai Street,Jawaharlal nehru Stadium, Periyamet",332,Chennai,7050,2,0,1,1,0,1
-112,25,The Belstead,"103, Nungambakkam High Rd, Ponnangipuram, Nungambakkam",332,Chennai,10670,3,0,1,1,1,1
-113,25,The Belstead,"103, Nungambakkam High Rd, Ponnangipuram, Nungambakkam",301,Chennai,13425,3,0,1,1,1,1
-114,26,Tushar Bhawan,"Namma Highway, Namma Nagar, near NLS Bangalore",202,Bangalore,9850.5,2,0,1,1,0,1
-115,26,Tushar Bhawan,"Namma Highway, Namma Nagar, near NLS Bangalore",103,Bangalore,9870,2,0,1,1,0,1
-116,26,Tushar Bhawan,"Namma Highway, Namma Nagar, near NLS Bangalore",332,Bangalore,10250,3,0,1,1,0,1
-117,27,Kantha Brigade,"near National Institute of Design, Miyapur, Thumakuru",201,Bangalore,3020,2,0,1,1,0,1
-118,27,Kantha Brigade,"near National Institute of Design, Miyapur, Thumakuru",204,Bangalore,3100,2,0,1,1,0,1
-119,27,Kantha Brigade,"near National Institute of Design, Miyapur, Thumakuru",332,Bangalore,2990,2,0,1,1,0,1
-120,28,Balharsha Bhawan,"opposite Lalbagh entrance, MGR Road, Bengaluru",506,Bangalore,560,2,1,0,0,1,0
-121,28,Balharsha Bhawan,"opposite Lalbagh entrance, MGR Road, Bengaluru",410,Bangalore,590,2,1,0,0,1,0
-122,28,Balharsha Bhawan,"opposite Lalbagh entrance, MGR Road, Bengaluru",332,Bangalore,720,2,0,0,0,1,0
-123,29,Leela Palace,"23, HAL Old Airport Rd, HAL 2nd Stage, Kodihalli",332,Bangalore,32300,5,0,1,1,0,1
-124,29,Leela Palace,"23, HAL Old Airport Rd, HAL 2nd Stage, Kodihalli",403,Bangalore,16900,3,1,1,1,0,1
-125,29,Leela Palace,"23, HAL Old Airport Rd, HAL 2nd Stage, Kodihalli",709,Bangalore,7800,2,1,1,1,0,1
-126,29,Leela Palace,"23, HAL Old Airport Rd, HAL 2nd Stage, Kodihalli",906,Bangalore,4570,2,1,1,1,0,1
+Hotel ID,Hotel_Name,Address,Number_of_rooms,City,Tariff,Comp_BF,WiFi,Car_Rental,AC,Swimming_Pool
+1,Taj Intercontinental,"B-35/1, Race Course Road, South Bombay, Memapur",5,Mumbai,32300,1,1,1,1,1
+2,Hotel Bhimas,"High Court Road, Nyay Marg, Townie Central, Navi Mumbai",4,Mumbai,8700,1,1,0,1,1
+3,Brigade Metropolis Plus,"Gulab Estate, T2 Terminal International Airport, MTNL Road, Sakinaka, Andheri, Mumbai, Maharashtra 400072",7,Mumbai,10249,1,1,0,1,1
+4,Oyo Manikantha 5166,"Gulab Estate, 8B, Sakinaka Tele Exchange Lane, T2 Airport Road, Sakinaka",6,Mumbai,3400,1,1,1,1,1
+5,Hotel Grandeur,"Crystal Plaza Plot N0.18/27, Sector 7 Kharghar, Navi Mumbai",4,Mumbai,4500,1,1,0,1,1
+6,Geetha Apsara Residemcy,"Danavaipeta, opposite Anand Regancy Theatre",5,Rajahmundry,940,0,0,1,0,0
+7,Shelton Grand,"26-3-7, Jampet, NAD Road",4,Rajahmundry,2400,0,1,0,1,0
+8,Udipi Akshaya,"NH-162, Bobbaralanka Nagar, near Kadiyam",6,Rajahmundry,1300,0,1,0,1,0
+9,Satya Homestay,"Maisamma Chaurassa Circle, Near Satyam Brewing Agencies, NTPL Road",9,Rajahmundry,450,0,0,1,0,0
+10,La Hospin,"101-A/2, Raj Marg, New Delhi Capital Area (UT)",3,Delhi,3400,1,1,0,1,1
+11,Rafale Grand,"Door NM-101, Scamabad, Bharath Vihar Nagar, Gandhinagar",4,Delhi,8500,1,1,0,1,1
+12,Tempe Residency,"Wahi Bagh, Banega Nagar, Gurgaon-Delhi Religious Highway",5,Delhi,9250,1,1,1,1,1
+13,Oyo 2020,"Vision Metropolis Complex, near AIIMS Delhi, Birla Nagar",6,Delhi,1560,1,1,0,1,0
+14,Hotel Unity,"G-101/A, Gandhi Road, MG Nagar",5,Vadodara,3300,1,1,0,1,1
+15,Democles Grand,"7, Jetalpur Rd, Sampatrao Colony, Alkapuri",6,Vadodara,2100,0,1,1,1,0
+16,Geass Residencies,"Layout 54-3/A, Sardar Vallabhai Nagar, Iron Man Road",5,Vadodara,1070,0,1,0,0,0
+17,Yagami Heights,"Comicon Road, Gacchibowli Area, opposite Light Avenue",5,Hyderabad,1050,0,1,0,1,0
+18,"Valmiki Bhawan, BPHC","Shameerpet (de)Forested Area, near Jawaharnagar, Thumukunta",5,Hyderabad,350,0,0,1,0,0
+19,Alankrita Holistic Resorts,"Middle of nowhere, Thumukunta, CRPF Highway – 500078",5,Hyderabad,5840,1,1,0,1,1
+20,Capital O Metropolis,"A90, Manikantha Marg, near SC Railway Station",4,Hyderabad,5800,1,1,0,1,1
+21,Nestlay Cafa,"New No. 6, Old No. 9, Plot No. 7, Zerald Garden, Second Lane, Casa Major Road, Egmore",5,Chennai,5040,1,1,1,1,1
+22,Regentra Central,"38, Royapettah High Rd, Jagadambal colony, Sripuram, Teachers Colony, Royapettah",3,Chennai,6980,1,1,0,1,1
+23,Ulli Residency,"Rama Pillai Street,Jawaharlal nehru Stadium, Periyamet",7,Chennai,7050,1,1,0,1,1
+24,The Belstead,"103, Nungambakkam High Rd, Ponnangipuram, Nungambakkam",4,Chennai,13425,1,1,1,1,1
+25,Kantha Brigade,"near National Institute of Design, Miyapur, Thumakuru",6,Bangalore,2990,1,1,0,1,0
+27,Leela Palace,"23, HAL Old Airport Rd, HAL 2nd Stage, Kodihalli",3,Bangalore,4570,1,1,0,1,1
+29,Hotel Sitara,"VM-123/4, Gandhi Road, opposite BSNL Bhawan, Kotagummam",5,Bangalore,1250,0,1,0,1,0
