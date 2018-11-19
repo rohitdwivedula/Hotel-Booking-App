@@ -63,9 +63,9 @@ public class BookingArea extends javax.swing.JFrame {
 
         City = new javax.swing.JComboBox<>();
         Search = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        CheckInTimeLabel = new javax.swing.JLabel();
         CheckIn = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        CheckOutTimeLabel = new javax.swing.JLabel();
         CheckOut = new javax.swing.JTextField();
         AC = new javax.swing.JCheckBox();
         Wifi = new javax.swing.JCheckBox();
@@ -90,11 +90,11 @@ public class BookingArea extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("CheckIn");
+        CheckInTimeLabel.setText("CheckIn");
 
         CheckIn.setText("MM-DD-YYYY");
 
-        jLabel2.setText("CheckOut");
+        CheckOutTimeLabel.setText("CheckOut");
 
         CheckOut.setText("MM-DD-YYYY");
         CheckOut.addActionListener(new java.awt.event.ActionListener() {
@@ -138,11 +138,11 @@ public class BookingArea extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(City, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
+                        .addComponent(CheckInTimeLabel)
                         .addGap(3, 3, 3)
                         .addComponent(CheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        .addComponent(CheckOutTimeLabel)
                         .addGap(3, 3, 3)
                         .addComponent(CheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
@@ -169,9 +169,9 @@ public class BookingArea extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(City, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Search)
-                    .addComponent(jLabel2)
+                    .addComponent(CheckOutTimeLabel)
                     .addComponent(CheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                    .addComponent(CheckInTimeLabel)
                     .addComponent(CheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -274,14 +274,14 @@ public class BookingArea extends javax.swing.JFrame {
     private javax.swing.JCheckBox AC;
     private javax.swing.JCheckBox CarRental;
     private javax.swing.JTextField CheckIn;
+    private javax.swing.JLabel CheckInTimeLabel;
     private javax.swing.JTextField CheckOut;
+    private javax.swing.JLabel CheckOutTimeLabel;
     private javax.swing.JComboBox<String> City;
     private javax.swing.JCheckBox CityView;
     private javax.swing.JCheckBox CompBF;
     private javax.swing.JButton Search;
     private javax.swing.JCheckBox Wifi;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

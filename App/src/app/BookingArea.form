@@ -29,11 +29,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="City" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="CheckInTimeLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Component id="CheckIn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="CheckOutTimeLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Component id="CheckOut" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -65,9 +65,9 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="City" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Search" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CheckOutTimeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="CheckOut" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CheckInTimeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="CheckIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -106,7 +106,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SearchActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="CheckInTimeLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="CheckIn"/>
       </Properties>
@@ -116,7 +116,7 @@
         <Property name="text" type="java.lang.String" value="MM-DD-YYYY"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="CheckOutTimeLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="CheckOut"/>
       </Properties>
