@@ -1,4 +1,4 @@
-package hotel_booking_app;
+package app;
 
 
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package hotel_booking_app;
+package app;
 
 // Login Frame.
 import java.sql.Connection;
