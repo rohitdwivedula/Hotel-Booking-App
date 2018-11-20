@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,13 +20,15 @@ import java.sql.Statement;
 public class DBConnection {
     public static ResultSet getResult(String S){
         try{
-                Connection conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/hotel_booking_app", "root", "123456789");
+                Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app?zeroDateTimeBehavior=convertToNull","root","test");
                 Statement stat = conn.createStatement();
             ResultSet RSet = stat.executeQuery(S);
             return RSet;
         }catch(SQLException se){
             se.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

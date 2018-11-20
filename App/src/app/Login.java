@@ -1,6 +1,7 @@
 package app;
 
 // Login Frame.
+import static app.DBConnection.getResult;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -195,12 +196,9 @@ public class Login extends javax.swing.JFrame {
 private boolean validate_login(String username,String password) {
      try
      {
-       Connection conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/hotel_booking_app", "root", "123456789");     
-       PreparedStatement pst = conn.prepareStatement("Select * from user_info where username=? and password=?");
-       pst.setString(1, username); 
-       pst.setString(2, password);
-       ResultSet rs = pst.executeQuery();                        
+       String query="SELECT * FROM user_info WHERE username=\""+username+"\"";
+       query+=" and password=\""+password+"\"";
+       ResultSet rs = getResult(query);                      
        if(rs.next())       
        {
         finalusername=username;

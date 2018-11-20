@@ -1,6 +1,6 @@
 package app;
 
-
+import static app.DBConnection.getResult;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -249,8 +249,8 @@ public class Emailvalidator {
 }
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
         try {
-            Connection conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/hotel_booking_app", "root", "123456789");
+            Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app?zeroDateTimeBehavior=convertToNull","root","test");
             String username = UsernameTxt.getText();
             SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
             String dateStr =DOB.getDate().toString();
@@ -343,9 +343,8 @@ public class Emailvalidator {
     try
     {
 
-        Connection connection = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/hotel_booking_app", "root", "123456789");
-
+        Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app?zeroDateTimeBehavior=convertToNull","root","test");
         PreparedStatement st = connection.prepareStatement("select * from user_info where username=?");
         st.setString(1,username);
         ResultSet r1=st.executeQuery();

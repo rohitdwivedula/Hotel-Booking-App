@@ -58,6 +58,10 @@ public class UserProfile extends javax.swing.JFrame {
         Username = new javax.swing.JLabel();
         Bookings = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        Cancel = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        Modify = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,7 +76,15 @@ public class UserProfile extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("To check previous bookings click the button below");
+        jLabel2.setText("Check previous bookings");
+
+        jLabel1.setText("Make Cancellations");
+
+        Cancel.setText("Cancel");
+
+        jLabel3.setText("Make Modifications");
+
+        Modify.setText("Modify");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,17 +93,22 @@ public class UserProfile extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(Bookings))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addComponent(welcome)
                         .addGap(46, 46, 46)
                         .addComponent(Username))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(jLabel2)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                        .addGap(109, 109, 109)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(77, 77, 77)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Cancel)
+                            .addComponent(Bookings)
+                            .addComponent(Modify))))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,11 +117,19 @@ public class UserProfile extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(welcome)
                     .addComponent(Username))
-                .addGap(49, 49, 49)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Bookings)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(Bookings))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(Cancel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(Modify))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,8 +151,8 @@ public class UserProfile extends javax.swing.JFrame {
         Vector data = new Vector(); 
 try{
         
-        Connection conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/hotel_booking_app", "root", "123456789");
+        Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app?zeroDateTimeBehavior=convertToNull","root","test");
         PreparedStatement ps=conn.prepareStatement("SELECT * FROM booking_info where username=?");
         ps.setString(1,finalusername);
         //ps.setString(1,"banshee");
@@ -140,8 +165,6 @@ try{
            {
               columnNames.addElement( md.getColumnName(i) );
            }
-        columnNames.addElement("Cancel");
-        columnNames.addElement("Modify");
         while (rs.next())
            {
               Vector row = new Vector(columns);
@@ -149,8 +172,6 @@ try{
               {
                  row.addElement(rs.getObject(i));
               }
-              row.addElement(new JButton("Cancel"));
-              row.addElement(new JButton("Modify"));
               data.addElement(row);
            }
            rs.close();
@@ -212,8 +233,12 @@ this.pack();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bookings;
+    private javax.swing.JButton Cancel;
+    private javax.swing.JButton Modify;
     private javax.swing.JLabel Username;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
