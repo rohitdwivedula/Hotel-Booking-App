@@ -12,7 +12,8 @@ Validity of a booking
 2 for cancelled
 */
 
-
+import static app.Utilities.checkAvailiability;
+import static app.DBConnection.getResult;
 import static app.Login.finalusername;
 import java.awt.Dimension;
 import java.sql.Connection;
@@ -20,6 +21,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.Set;
@@ -43,6 +45,30 @@ public class UserProfile extends javax.swing.JFrame {
     public UserProfile() {
         initComponents();
     }
+    DefaultTableModel model;
+    
+//    private void list()
+//    {
+//        String query="SELECT * FROM booking_info WHERE username=\""+finalusername+"\"";
+//        ResultSet RSet = getResult(query);
+//        int i=0;
+//        model = (DefaultTableModel) Bookings.getModel();
+//        model.setRowCount(0);
+//        try {
+//            while(RSet.next()){
+//                String bid = RSet.getString("Booking_ID");
+//                int roomconf = RSet.getInt("rooms_confirmed");
+//                int roomwait = RSet.getInt("rooms_waitlist");
+//                java.sql.Date datein=RSet.getDate("Date_In");
+//                java.sql.Date dateout=RSet.getDate("Date_Out");
+//                int status=RSet.getInt("Status");
+//                Object row[] = {bid,roomconf,roomwait,datein,dateout,status};
+//                model.addRow(row);
+//            }
+//        }catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,14 +79,12 @@ public class UserProfile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         welcome = new javax.swing.JLabel();
         Username = new javax.swing.JLabel();
-        Bookings = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Bookings = new javax.swing.JTable();
+        CheckBookings = new javax.swing.JButton();
         Cancel = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         Modify = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,128 +93,185 @@ public class UserProfile extends javax.swing.JFrame {
 
         Username.setText(finalusername);
 
-        Bookings.setText("Bookings");
-        Bookings.addActionListener(new java.awt.event.ActionListener() {
+        Bookings.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Booking ID", "Rooms Confirmed", "Rooms Waitlisted", "Check In Date", "Check Out Date", "Status", "Hotel ID"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(Bookings);
+
+        CheckBookings.setText("Check Bookings");
+        CheckBookings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BookingsActionPerformed(evt);
+                CheckBookingsActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Check previous bookings");
-
-        jLabel1.setText("Make Cancellations");
-
         Cancel.setText("Cancel");
-
-        jLabel3.setText("Make Modifications");
+        Cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelActionPerformed(evt);
+            }
+        });
 
         Modify.setText("Modify");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(welcome)
-                        .addGap(46, 46, 46)
-                        .addComponent(Username))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(77, 77, 77)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Cancel)
-                            .addComponent(Bookings)
-                            .addComponent(Modify))))
-                .addContainerGap(149, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(welcome)
-                    .addComponent(Username))
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(Bookings))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(Cancel))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(Modify))
-                .addContainerGap(165, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(210, 210, 210)
+                                .addComponent(welcome)
+                                .addGap(132, 132, 132)
+                                .addComponent(Username))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(CheckBookings)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Cancel)))
+                        .addGap(53, 53, 53)
+                        .addComponent(Modify)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)))
+                .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(welcome)
+                    .addComponent(Username))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CheckBookings)
+                        .addGap(65, 65, 65))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Cancel)
+                            .addComponent(Modify))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(164, 164, 164))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingsActionPerformed
-        Vector columnNames = new Vector();
-        Vector data = new Vector(); 
-try{
+    private void CheckBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBookingsActionPerformed
+        String query="SELECT * FROM booking_info WHERE username=\""+finalusername+"\"";
+        ResultSet RSet = getResult(query);
+        int i=0;
+        model = (DefaultTableModel) Bookings.getModel();
+        model.setRowCount(0);
+        try {
+            while(RSet.next()){
+                int bid = RSet.getInt("Booking_ID");
+                int roomconf = RSet.getInt("rooms_confirmed");
+                int roomwait = RSet.getInt("rooms_waitlist");
+                java.sql.Date datein=RSet.getDate("Date_In");
+                java.sql.Date dateout=RSet.getDate("Date_Out");
+                int status=RSet.getInt("Status");
+                int hid=RSet.getInt("Hotel_ID");
+                String stat = null;
+                if(status==0)
+                {
+                    stat="Confirmed";
+                }
+                else if(status==1)
+                {
+                    stat="Waitlisted";
+                }
+                else if(status==2)
+                {
+                    stat="Cancelled";
+                }
+                Object row[] = {bid,roomconf,roomwait,datein,dateout,stat,hid};
+                model.addRow(row);
+                //Bookings.setRowSelectionAllowed(true);
+            }
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_CheckBookingsActionPerformed
+
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         
+        try{
+        // Change to Cancelled    
         Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app?zeroDateTimeBehavior=convertToNull","root","test");
-        PreparedStatement ps=conn.prepareStatement("SELECT * FROM booking_info where username=?");
-        ps.setString(1,finalusername);
-        //ps.setString(1,"banshee");
-        ResultSet rs = ps.executeQuery();
-        ResultSetMetaData md = rs.getMetaData();
-        //Username.setText(finalusername);
-        //Username.setText("banshee");
-        int columns = md.getColumnCount();
-        for (int i = 1; i <= columns; i++)
-           {
-              columnNames.addElement( md.getColumnName(i) );
-           }
-        while (rs.next())
-           {
-              Vector row = new Vector(columns);
-              for (int i = 1; i <= columns; i++)
-              {
-                 row.addElement(rs.getObject(i));
-              }
-              data.addElement(row);
-           }
-           rs.close();
-}
-catch(Exception e)
-{
-    System.out.println(e);
-}
-
-JTable table = new JTable(data, columnNames);
-JScrollPane scrollPane = new JScrollPane( table );
-table.setPreferredScrollableViewportSize(new Dimension(1000, 200));
-JScrollPane scrollPane1 = new JScrollPane( table );
-JPanel panel = new JPanel();
-panel.add(scrollPane1);
-this.add(panel);
-this.setContentPane(panel);
-this.pack();
-    }//GEN-LAST:event_BookingsActionPerformed
+        int rowIndex = Bookings.getSelectedRow();
+        int bookid= (int) model.getValueAt(rowIndex, 0);
+        int hid1=(int) model.getValueAt(rowIndex,6);
+        java.sql.Date datein=(java.sql.Date) model.getValueAt(rowIndex,3);
+        java.sql.Date dateout=(java.sql.Date) model.getValueAt(rowIndex,4);
+        int status1= 2;
+        String query1="update booking_info set Status=\""+status1+"\"";
+        query1+="where Booking_ID=\""+bookid+"\"";
+        PreparedStatement preparedStmt = conn.prepareStatement(query1);
+        preparedStmt.execute();
+        
+        // Waitlist Implementation
+        //int avail=checkAvailiability(hid1,datein,dateout);
+        int avail=4;
+        String query2="SELECT * FROM booking_info where Status=1 order by Booking_ID asc";
+        ResultSet rs2=getResult(query2);
+        while(rs2.next())
+        {
+            int wlrooms=rs2.getInt("rooms_waitlist");
+            if(avail>0 && wlrooms<avail)
+            {
+                int bookedid=rs2.getInt("Booking_ID");
+                
+                int status2= 0;
+                String query3="update booking_info set Status=\""+status2+"\"";
+                query3+="where Booking_ID=\""+bookedid+"\"";
+                PreparedStatement preparedStmt2 = conn.prepareStatement(query3);
+                preparedStmt.execute();
+                int confrooms=rs2.getInt("rooms_confirmed");
+                confrooms=confrooms+wlrooms;
+                String query4="update booking_info set rooms_confirmed=\""+confrooms+"\"";
+                query4+="where Booking_ID=\""+bookedid+"\"";
+                PreparedStatement preparedStmt3 = conn.prepareStatement(query4);
+                preparedStmt3.execute();
+                avail=avail-wlrooms;
+                wlrooms=0;
+                String query5="update booking_info set rooms_waitlist=\""+wlrooms+"\"";
+                query5+="where Booking_ID=\""+bookedid+"\"";
+                PreparedStatement preparedStmt4 = conn.prepareStatement(query5);
+                preparedStmt4.execute();              
+                avail=avail-wlrooms;
+        }
+        
+        
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        
+        
+    }//GEN-LAST:event_CancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,14 +313,12 @@ this.pack();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Bookings;
+    private javax.swing.JTable Bookings;
     private javax.swing.JButton Cancel;
+    private javax.swing.JButton CheckBookings;
     private javax.swing.JButton Modify;
     private javax.swing.JLabel Username;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }

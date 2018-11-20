@@ -343,11 +343,8 @@ public class Emailvalidator {
     try
     {
 
-        Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app?zeroDateTimeBehavior=convertToNull","root","test");
-        PreparedStatement st = connection.prepareStatement("select * from user_info where username=?");
-        st.setString(1,username);
-        ResultSet r1=st.executeQuery();
+       String query="SELECT * FROM user_info WHERE username=\""+username+"\"";
+        ResultSet r1=getResult(query);
          if(r1.next()) 
          {
            usernameExists = true;
