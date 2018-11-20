@@ -10,6 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,6 +18,8 @@ import java.util.logging.Logger;
  */
 public class BookingArea extends javax.swing.JFrame {
 
+    
+    DefaultTableModel model;
     /**
      * Creates new form BookingArea
      */
@@ -40,6 +43,44 @@ public class BookingArea extends javax.swing.JFrame {
         return city_names;
     }
     
+    private void update_listing()
+    {
+        String query= "SELECT * FROM room_info WHERE city=\""+City.getSelectedItem()+"\"";
+        if(CompBF.isSelected()){
+            query+=" AND COMP_BF = 1";
+        }
+        if(AC.isSelected()){
+            query+=" AND AC = 1";
+        }
+        if(Wifi.isSelected()){
+            query+=" AND WiFi = 1";
+        }
+        if(CarRental.isSelected()){
+            query+=" AND Car_Rental = 1";
+        }
+        if(Pool.isSelected()){
+            query+=" AND Swimming_Pool = 1";
+        }
+        query+=" AND tariff < ";
+        query+= MaxPrice.getValue();
+        System.out.println(query);
+        ResultSet RSet = getResult(query);
+        int i=0;
+        model = (DefaultTableModel) HotelsAvailable.getModel();
+        model.setRowCount(0);
+        try {
+            while(RSet.next()){
+                String hotel = RSet.getString("Hotel_Name");
+                String address = RSet.getString("Address");
+                int tariff = RSet.getInt("Tariff");
+                int rating  = 0;
+                Object row[] = {hotel, address, tariff, rating};
+                model.addRow(row);
+            }
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,6 +98,13 @@ public class BookingArea extends javax.swing.JFrame {
         Wifi = new javax.swing.JCheckBox();
         CarRental = new javax.swing.JCheckBox();
         CompBF = new javax.swing.JCheckBox();
+        CheckInDate = new org.jdesktop.swingx.JXDatePicker();
+        CheckOutDate = new org.jdesktop.swingx.JXDatePicker();
+        Pool = new javax.swing.JCheckBox();
+        HotelsScrollArea = new javax.swing.JScrollPane();
+        HotelsAvailable = new javax.swing.JTable();
+        MaxPrice = new javax.swing.JSlider(50, 99000, 15000);
+        MaxPriceLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,36 +144,91 @@ public class BookingArea extends javax.swing.JFrame {
             }
         });
 
+        Pool.setText("Swimming Pool");
+        Pool.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PoolActionPerformed(evt);
+            }
+        });
+
+        HotelsAvailable.setFont(new java.awt.Font("Noto Sans Mono CJK JP Bold", 0, 12)); // NOI18N
+        HotelsAvailable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Hotel Name", "Address", "Tariff", "Rating"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        HotelsAvailable.setRowHeight(50);
+        HotelsAvailable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        HotelsScrollArea.setViewportView(HotelsAvailable);
+
+        MaxPrice.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                MaxPriceStateChanged(evt);
+            }
+        });
+
+        MaxPriceLabel.setText("Max Price: " + MaxPrice.getValue());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(City, 0, 127, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CheckInTimeLabel)
-                        .addGap(345, 345, 345)
-                        .addComponent(Search)
-                        .addGap(33, 33, 33))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(AC)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Wifi)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addComponent(HotelsScrollArea, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
                         .addComponent(CarRental)
-                        .addGap(161, 161, 161))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(CompBF)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CheckOutTimeLabel)
-                .addGap(219, 219, 219))
+                        .addGap(34, 34, 34)
+                        .addComponent(Pool)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(MaxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(98, 98, 98))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(MaxPriceLabel)
+                                .addGap(158, 158, 158))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(City, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CheckInTimeLabel)
+                                .addGap(4, 4, 4))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(CompBF)
+                                .addGap(18, 18, 18)
+                                .addComponent(AC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(Wifi))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(CheckInDate, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CheckOutTimeLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CheckOutDate, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Search)))))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,59 +236,64 @@ public class BookingArea extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(City, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Search)
-                    .addComponent(CheckInTimeLabel))
+                    .addComponent(CheckInDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CheckOutTimeLabel)
+                    .addComponent(CheckOutDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CheckInTimeLabel)
+                    .addComponent(Search))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarRental)
-                    .addComponent(Wifi)
-                    .addComponent(AC))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CompBF)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                .addComponent(CheckOutTimeLabel)
-                .addGap(67, 67, 67))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Wifi)
+                            .addComponent(AC)
+                            .addComponent(CompBF)
+                            .addComponent(MaxPriceLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CarRental)
+                            .addComponent(Pool)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(MaxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(HotelsScrollArea, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
-        String query= "SELECT * FROM room_info WHERE city=\""+City.getSelectedItem()+"\"";
-        if(CompBF.isSelected()){
-            query+=" AND COMP_BF = 1";
-        }
-        if(AC.isSelected()){
-            query+=" AND AC = 1";
-        }
-        if(Wifi.isSelected()){
-            query+=" AND WiFi = 1";
-        }
-        if(CarRental.isSelected()){
-            query+=" AND Car_Rental = 1";
-        }
-        System.out.println(query);
-        ResultSet RSet = getResult(query);
-        try {
-            while(RSet.next()){
-                
-            }
-        }catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+        update_listing();
     }//GEN-LAST:event_SearchActionPerformed
 
     private void CarRentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarRentalActionPerformed
         // TODO add your handling code here:
+        update_listing();
     }//GEN-LAST:event_CarRentalActionPerformed
 
     private void CompBFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompBFActionPerformed
         // TODO add your handling code here:
+        update_listing();
     }//GEN-LAST:event_CompBFActionPerformed
 
     private void CityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CityActionPerformed
         // TODO add your handling code here:
+        update_listing();
     }//GEN-LAST:event_CityActionPerformed
+
+    private void PoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PoolActionPerformed
+        // TODO add your handling code here:
+        update_listing();
+    }//GEN-LAST:event_PoolActionPerformed
+
+    private void MaxPriceStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_MaxPriceStateChanged
+        // TODO add your handling code here:
+        MaxPriceLabel.setText("Max Price:" + MaxPrice.getValue());
+        update_listing();
+        
+    }//GEN-LAST:event_MaxPriceStateChanged
 
     /**
      * @param args the command line arguments
@@ -225,10 +333,17 @@ public class BookingArea extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox AC;
     private javax.swing.JCheckBox CarRental;
+    private org.jdesktop.swingx.JXDatePicker CheckInDate;
     private javax.swing.JLabel CheckInTimeLabel;
+    private org.jdesktop.swingx.JXDatePicker CheckOutDate;
     private javax.swing.JLabel CheckOutTimeLabel;
     private javax.swing.JComboBox<String> City;
     private javax.swing.JCheckBox CompBF;
+    private javax.swing.JTable HotelsAvailable;
+    private javax.swing.JScrollPane HotelsScrollArea;
+    private javax.swing.JSlider MaxPrice;
+    private javax.swing.JLabel MaxPriceLabel;
+    private javax.swing.JCheckBox Pool;
     private javax.swing.JButton Search;
     private javax.swing.JCheckBox Wifi;
     // End of variables declaration//GEN-END:variables
