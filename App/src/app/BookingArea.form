@@ -27,35 +27,34 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="City" max="32767" attributes="0"/>
+                      <Component id="City" pref="127" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="CheckInTimeLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                      <Component id="CheckIn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="CheckOutTimeLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                      <Component id="CheckOut" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="345" max="-2" attributes="0"/>
                       <Component id="Search" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
-                      <Component id="CompBF" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="AC" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Wifi" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="CarRental" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="CityView" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
-          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <Component id="CompBF" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="CheckOutTimeLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="219" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -65,21 +64,19 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="City" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Search" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CheckOutTimeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CheckOut" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="CheckInTimeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CheckIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="CarRental" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CityView" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Wifi" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="AC" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CompBF" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="246" max="32767" attributes="0"/>
+              <Component id="CompBF" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="137" max="32767" attributes="0"/>
+              <Component id="CheckOutTimeLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -111,23 +108,10 @@
         <Property name="text" type="java.lang.String" value="CheckIn"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="CheckIn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="MM-DD-YYYY"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="CheckOutTimeLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="CheckOut"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="CheckOut">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="MM-DD-YYYY"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CheckOutActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="AC">
       <Properties>
@@ -147,14 +131,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CarRentalActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="CityView">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="City View"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CityViewActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JCheckBox" name="CompBF">
       <Properties>
         <Property name="text" type="java.lang.String" value="Complimentary Breakfast"/>
@@ -163,9 +139,5 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CompBFActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-    </Container>
   </SubComponents>
 </Form>

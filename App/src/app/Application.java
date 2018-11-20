@@ -3,19 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package app;
 
 /**
  *
  * @author rohit
  */
+import javax.swing.UIManager;
+
 public class Application {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try{
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        new Login().setVisible(true);
+        
     }
     
 }
