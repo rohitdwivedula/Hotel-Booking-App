@@ -21,7 +21,7 @@ public class DBConnection {
     public static ResultSet getResult(String S){
         try{
                 Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app?zeroDateTimeBehavior=convertToNull","root","test");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app","root","123456789");
                 Statement stat = conn.createStatement();
             ResultSet RSet = stat.executeQuery(S);
             return RSet;

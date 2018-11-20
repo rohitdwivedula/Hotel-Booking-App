@@ -7,7 +7,10 @@ package app;
 
 import static app.DBConnection.getResult;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -105,6 +108,7 @@ public class BookingArea extends javax.swing.JFrame {
         HotelsAvailable = new javax.swing.JTable();
         MaxPrice = new javax.swing.JSlider(50, 99000, 15000);
         MaxPriceLabel = new javax.swing.JLabel();
+        BookNow = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,8 +131,18 @@ public class BookingArea extends javax.swing.JFrame {
         CheckOutTimeLabel.setText("CheckOut");
 
         AC.setText("AC");
+        AC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ACActionPerformed(evt);
+            }
+        });
 
         Wifi.setText("WiFi");
+        Wifi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WifiActionPerformed(evt);
+            }
+        });
 
         CarRental.setText("Car Rental");
         CarRental.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +194,13 @@ public class BookingArea extends javax.swing.JFrame {
 
         MaxPriceLabel.setText("Max Price: " + MaxPrice.getValue());
 
+        BookNow.setText("Check Availability");
+        BookNow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookNowActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -229,6 +250,10 @@ public class BookingArea extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(Search)))))
                 .addGap(23, 23, 23))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(335, 335, 335)
+                .addComponent(BookNow)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +283,9 @@ public class BookingArea extends javax.swing.JFrame {
                         .addComponent(MaxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(HotelsScrollArea, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BookNow)
+                .addContainerGap())
         );
 
         pack();
@@ -269,31 +296,47 @@ public class BookingArea extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchActionPerformed
 
     private void CarRentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarRentalActionPerformed
-        // TODO add your handling code here:
         update_listing();
     }//GEN-LAST:event_CarRentalActionPerformed
 
     private void CompBFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompBFActionPerformed
-        // TODO add your handling code here:
         update_listing();
     }//GEN-LAST:event_CompBFActionPerformed
 
     private void CityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CityActionPerformed
-        // TODO add your handling code here:
         update_listing();
     }//GEN-LAST:event_CityActionPerformed
 
     private void PoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PoolActionPerformed
-        // TODO add your handling code here:
         update_listing();
     }//GEN-LAST:event_PoolActionPerformed
 
     private void MaxPriceStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_MaxPriceStateChanged
-        // TODO add your handling code here:
         MaxPriceLabel.setText("Max Price:" + MaxPrice.getValue());
         update_listing();
         
     }//GEN-LAST:event_MaxPriceStateChanged
+
+    private void ACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACActionPerformed
+        update_listing();
+    }//GEN-LAST:event_ACActionPerformed
+
+    private void WifiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WifiActionPerformed
+        update_listing();
+    }//GEN-LAST:event_WifiActionPerformed
+
+    private void BookNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookNowActionPerformed
+//        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+//        String dateStr = CheckInDate.getDate().toString();
+//        DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+//        Date date = (Date)formatter.parse(dateStr); 
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(date);
+//        String formatedDate = cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" +         cal.get(Calendar.YEAR);
+//        java.util.Date date1 = formater.parse(formatedDate);
+//        java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+
+    }//GEN-LAST:event_BookNowActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,6 +375,7 @@ public class BookingArea extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox AC;
+    private javax.swing.JButton BookNow;
     private javax.swing.JCheckBox CarRental;
     private org.jdesktop.swingx.JXDatePicker CheckInDate;
     private javax.swing.JLabel CheckInTimeLabel;

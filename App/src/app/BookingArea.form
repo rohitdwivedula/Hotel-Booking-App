@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -82,6 +82,11 @@
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
+              <Component id="BookNow" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -96,7 +101,6 @@
                   <Component id="CheckInTimeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Search" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -118,7 +122,9 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="HotelsScrollArea" min="-2" pref="232" max="-2" attributes="0"/>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="BookNow" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -159,11 +165,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="AC"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ACActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="Wifi">
       <Properties>
         <Property name="text" type="java.lang.String" value="WiFi"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="WifiActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="CarRental">
       <Properties>
@@ -263,6 +275,14 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JLabel()"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="BookNow">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Check Availability"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BookNowActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
