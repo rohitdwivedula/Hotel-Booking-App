@@ -201,9 +201,6 @@ public class BookingArea extends javax.swing.JFrame {
         if(CarRental.isSelected()){
             query+=" AND Car_Rental = 1";
         }
-        if(CityView.isSelected()){
-            query+=" AND City_View = 1";
-        }
         System.out.println(query);
         ResultSet RSet = getResult(query);
         try {
