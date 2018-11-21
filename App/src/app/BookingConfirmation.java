@@ -6,7 +6,7 @@
 package app;
 
 import static app.Utilities.checkAvailability;
-import static app.DBConnection.getResult;
+import static app.DBConnection.*;
 import static app.Login.finalusername;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -14,6 +14,11 @@ import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import static  java.awt.Image.SCALE_SMOOTH;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author rohit
@@ -126,7 +131,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
         username = new javax.swing.JLabel();
         IDType = new javax.swing.JComboBox<>();
         EnterIDNumLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        IDNumber = new javax.swing.JTextField();
         CheckOutDateLabel = new javax.swing.JLabel();
         RoomsAvailableInHotel = new javax.swing.JLabel();
         CheckInDateLabel = new javax.swing.JLabel();
@@ -217,9 +222,9 @@ public class BookingConfirmation extends javax.swing.JFrame {
 
         EnterIDNumLabel.setText("Enter " + IDType.getSelectedItem() + " number:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        IDNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                IDNumberActionPerformed(evt);
             }
         });
 
@@ -293,7 +298,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(EnterIDNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(IDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(IDType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -375,7 +380,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
                                 .addGap(3, 3, 3)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(EnterIDNumLabel)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(IDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
                                 .addComponent(CheckInDateLabel)
@@ -394,7 +399,70 @@ public class BookingConfirmation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmButtonActionPerformed
+        int booking_id = 0;
+        String ID_Number = IDNumber.getText();
+        if (ID_Number.length() == 0){
+             JOptionPane.showMessageDialog(null, "As per government orders, you must present valid ID while booking hotel.", "Enter ID Number", JOptionPane.ERROR_MESSAGE); 
+             return;
+        }
+        String query = "SELECT MAX(Booking_ID) FROM booking_info;";
+        ResultSet rs = getResult(query);
+        try{
+            rs.next();
+            int n = rs.getInt("MAX(Booking_ID)");
+            if(n==0){
+                booking_id = 32647;
+            }
+            else{
+                booking_id = n+1;
+            }
+            System.out.println("HELLO MOM + n: "  + n);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        query = "INSERT INTO booking_info VALUES (";
+        query += booking_id;
+        query += ",\"";
+        query += "bro";
+        query += "\", ";
+        query += HID;
+        query += ", ";
         
+        int guests, total_rooms, rooms_confirmed, rooms_waitlisted, status, available_rooms;
+        available_rooms = checkAvailability(HID, checkIn, checkOut);
+        guests = NumberOfGuests.getValue();
+        total_rooms = (int) guests/3;
+        if(guests%3 != 0){
+            total_rooms++;
+        }
+        if(available_rooms >= total_rooms){
+            rooms_confirmed = total_rooms;
+            rooms_waitlisted = 0;
+            status = 0;
+        }
+        else{
+            rooms_confirmed = available_rooms;
+            rooms_waitlisted = total_rooms - rooms_confirmed;
+            status = 1;
+        }
+        query += rooms_confirmed;
+        query += ", ";
+        query += rooms_waitlisted;
+        query += ", \"";
+        query += checkIn;
+        query += "\", \"";
+        query += checkOut;
+        query += "\", \"";
+        query += IDType.getSelectedItem();
+        query += "\", \"";
+        query += ID_Number;
+        query += "\", ";
+        query += status;  
+        query += ");";
+        System.out.println(query);
+        InsertRow(query);
+        JOptionPane.showMessageDialog(null, "Your booking has been generated with booking ID" + booking_id, "Booking received." , JOptionPane.ERROR_MESSAGE); 
+        return;
     }//GEN-LAST:event_ConfirmButtonActionPerformed
 
     private void NumberOfGuestsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_NumberOfGuestsStateChanged
@@ -409,9 +477,9 @@ public class BookingConfirmation extends javax.swing.JFrame {
         NumberOfRoomsLabel.setText("Number of Rooms*: " + rooms_to_book);        
     }//GEN-LAST:event_NumberOfGuestsStateChanged
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void IDNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDNumberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_IDNumberActionPerformed
 
     private void IDTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_IDTypeItemStateChanged
         EnterIDNumLabel.setText("Enter " + IDType.getSelectedItem() + " number:");
@@ -471,6 +539,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
     private javax.swing.JLabel GuestsLabel;
     private javax.swing.JLabel GuestsNumberDisclaimer;
     private javax.swing.JLabel HotelName;
+    private javax.swing.JTextField IDNumber;
     private javax.swing.JComboBox<String> IDType;
     private javax.swing.JLabel Image;
     private javax.swing.JSlider NumberOfGuests;
@@ -482,7 +551,6 @@ public class BookingConfirmation extends javax.swing.JFrame {
     private javax.swing.JLabel WiFiLabel;
     private javax.swing.JLabel Wifi_img;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

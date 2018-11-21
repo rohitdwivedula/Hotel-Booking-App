@@ -351,9 +351,7 @@ public class Emailvalidator {
          }
 
 
-     }
-
-     catch (Exception e) 
+     }catch (Exception e) 
      {
         JOptionPane.showMessageDialog(null,"Exception");
      } 
@@ -363,14 +361,14 @@ public class Emailvalidator {
  }
     
     public static boolean PasswordEquality(String s1,String s2)
-{
+    {
     boolean equal = false;
 
     if(Objects.equals(s1,s2))
         equal=true;
 
- return equal;
- }
+    return equal;
+    }
     
     
     

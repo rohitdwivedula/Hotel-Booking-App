@@ -99,7 +99,7 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="EnterIDNumLabel" min="-2" pref="207" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField1" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <Component id="IDNumber" min="-2" pref="128" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="IDType" max="32767" attributes="0"/>
                               </Group>
@@ -209,7 +209,7 @@
                               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="EnterIDNumLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="IDNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -434,9 +434,9 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="IDNumber">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IDNumberActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="CheckOutDateLabel">

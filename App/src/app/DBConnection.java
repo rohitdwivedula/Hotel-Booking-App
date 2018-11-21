@@ -30,4 +30,14 @@ public class DBConnection {
         }
         return null;
     }
+    
+    public static void InsertRow(String S){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app","root","123456789");
+            Statement stat = conn.createStatement();
+            stat.executeUpdate(S);
+        }catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
 }

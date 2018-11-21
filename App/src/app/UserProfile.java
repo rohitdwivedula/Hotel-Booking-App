@@ -12,7 +12,7 @@ Validity of a booking
 2 for cancelled
 */
 
-import static app.Utilities.checkAvailiability;
+import static app.Utilities.checkAvailability;
 import static app.DBConnection.getResult;
 import static app.Login.finalusername;
 import java.awt.Dimension;

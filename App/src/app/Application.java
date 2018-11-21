@@ -28,16 +28,17 @@ public class Application {
         catch(Exception e){
             e.printStackTrace();
         }
-        
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
         Date DateIn = null, DateOut = null;
         try{
-            DateIn = (Date) convertDate(sdf1.parse("21-03-2019"));
-            DateOut = (Date) convertDate(sdf1.parse("24-03-2018"));
+            DateIn = (Date) convertDate(sdf1.parse("23-11-2018"));
+            DateOut = (Date) convertDate(sdf1.parse("23-11-2018"));
         }catch(ParseException ex){
             ex.printStackTrace();
         }
-        new Login().setVisible(true);
+        System.out.println(getDateDifference(DateOut, DateIn));
+        System.out.println("LOL: " + checkAvailability(1, DateIn, DateOut));
+//        new Login().setVisible(true);
     }
     
 }

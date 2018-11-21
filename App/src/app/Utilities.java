@@ -61,17 +61,20 @@ public class Utilities {
             days[i] = 0;
         }
         ResultSet rs;
-        String query = "SELECT rooms_confirmed FROM booking_info WHERE (Status=0 OR STATUS = 1) AND Hotel_ID = " + HID;
+        String query = "SELECT rooms_confirmed, Date_In,Date_Out  FROM booking_info WHERE (Status=0 OR STATUS = 1) AND Hotel_ID = " + HID;
+        System.out.println(query);
         try{
             //CASE 1
-            rs = getResult(query + " AND Date_In < " + DateIn + " AND Date_Out > " + DateOut + ";");
+            rs = getResult(query + " AND Date_In < \"" + DateIn + "\" AND Date_Out > \"" + DateOut + "\";");
+            System.out.println(query + " AND Date_In < \"" + DateIn + "\" AND Date_Out > \"" + DateOut + "\";");
             while(rs.next()){
                 for(int i=0;i<=n;i++){
                     days[i] += 1;
                 }
             }
             //CASE 2
-            rs = getResult(query + " AND Date_In >= " + DateIn + " AND Date_Out <= " + DateOut + ";");
+            rs = getResult(query + " AND Date_In >= \"" + DateIn + "\" AND Date_Out <= \"" + DateOut + "\";");
+            System.out.println(query + " AND Date_In >= \"" + DateIn + "\" AND Date_Out <= \"" + DateOut + "\";");
             while(rs.next()){
                 int i,j;
                 i = getDateDifference(rs.getDate("Date_In"), DateIn);
@@ -84,7 +87,9 @@ public class Utilities {
                 }
             }
             //CASE 3
-            rs = getResult(query + " AND Date_In >= " + DateIn + " AND Date_In <= " + DateOut + " AND Date_Out > " + DateOut + ";");
+            rs = getResult(query + " AND Date_In >= \"" + DateIn + "\" AND Date_In <= \"" + DateOut + "\" AND Date_Out > \"" + DateOut + "\";");
+            System.out.println(query + " AND Date_In >= \"" + DateIn + "\" AND Date_In <= \"" + DateOut + "\" AND Date_Out > \"" + DateOut + "\";");
+            
             while(rs.next()){
                 int i,j;
                 j = n;
@@ -94,7 +99,8 @@ public class Utilities {
                 }
             }
             //CASE 4
-            rs = getResult(query + " AND Date_In < " + DateIn + " AND Date_Out <= " + DateOut + " AND Date_Out >= " + DateIn + ";");
+            rs = getResult(query + " AND Date_In < \"" + DateIn + "\" AND Date_Out <= \"" + DateOut + "\" AND Date_Out >= \"" + DateIn + "\";");
+            System.out.println(query + " AND Date_In < \"" + DateIn + "\" AND Date_Out <= \"" + DateOut + "\" AND Date_Out >= \"" + DateIn + "\";");
             while(rs.next()){
                 int i,j;
                 i = 0;
@@ -109,6 +115,7 @@ public class Utilities {
         
         int rooms = days[0];
         for(int i=0;i<=n;i++){
+            System.out.print(days[i] + " ");
             if(days[i] > rooms)
                 rooms = days[i];
         }
