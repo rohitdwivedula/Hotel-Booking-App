@@ -10,6 +10,10 @@ package app;
  *
  * @author rohit
  */
+import static app.Utilities.*;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.UIManager;
 
 public class Application {
@@ -17,7 +21,7 @@ public class Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         try{
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
@@ -25,8 +29,15 @@ public class Application {
             e.printStackTrace();
         }
         
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+        Date DateIn = null, DateOut = null;
+        try{
+            DateIn = (Date) convertDate(sdf1.parse("21-03-2019"));
+            DateOut = (Date) convertDate(sdf1.parse("24-03-2018"));
+        }catch(ParseException ex){
+            ex.printStackTrace();
+        }
         new Login().setVisible(true);
-        
     }
     
 }

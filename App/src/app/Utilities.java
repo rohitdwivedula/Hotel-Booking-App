@@ -18,16 +18,25 @@ public class Utilities {
     
     /**
      *
+     * @param date date in java.util.Date format
+     * @return date in java.sql.date format
+     */
+    public static java.sql.Date convertDate(java.util.Date date)
+    {
+        return new java.sql.Date(date.getTime());
+    }
+    /**
+     *
      * @param A first date
      * @param B second date
      * @return (A-B)
      */
     public static int getDateDifference(java.sql.Date A, java.sql.Date B){
-        String query = "SelECT DATEDIFF(" + A + ", " + B + ");";
+        String query = "DATEDIFF(\"" + A + "\", \"" + B + "\")";
         ResultSet rs;
         int n = 0;
         try {
-            rs = getResult(query);
+            rs = getResult("SELECT " + query+";");
             rs.next();
             n = rs.getInt(query);
         } catch (SQLException ex) {
@@ -42,7 +51,7 @@ public class Utilities {
      * @param DateOut Date of Check Out
      * @return number of rooms available on the date range
      */
-    public static int checkAvailiability(int HID, java.sql.Date DateIn, java.sql.Date DateOut){
+    public static int checkAvailability(int HID, java.sql.Date DateIn, java.sql.Date DateOut){
         int n = getDateDifference(DateOut, DateIn);
         if(n < 0){
             return -1; //indicates an error in date formatting

@@ -6,13 +6,16 @@
 package app;
 
 import static app.DBConnection.getResult;
+import static app.Utilities.*;
 import java.sql.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -73,11 +76,12 @@ public class BookingArea extends javax.swing.JFrame {
         model.setRowCount(0);
         try {
             while(RSet.next()){
+                int HID = RSet.getInt("Hotel_ID");
                 String hotel = RSet.getString("Hotel_Name");
                 String address = RSet.getString("Address");
                 int tariff = RSet.getInt("Tariff");
                 int rating  = 0;
-                Object row[] = {hotel, address, tariff, rating};
+                Object row[] = {HID, hotel, address, tariff, rating};
                 model.addRow(row);
             }
         }catch (SQLException ex) {
@@ -171,11 +175,11 @@ public class BookingArea extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Hotel Name", "Address", "Tariff", "Rating"
+                "HID", "Hotel Name", "Address", "Tariff", "Rating"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -217,13 +221,8 @@ public class BookingArea extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addComponent(Pool)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(MaxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(98, 98, 98))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(MaxPriceLabel)
-                                .addGap(158, 158, 158))))
+                        .addComponent(MaxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(98, 98, 98))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -240,7 +239,9 @@ public class BookingArea extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(Wifi))
+                                .addComponent(Wifi)
+                                .addGap(130, 130, 130)
+                                .addComponent(MaxPriceLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(CheckInDate, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -266,21 +267,22 @@ public class BookingArea extends javax.swing.JFrame {
                     .addComponent(CheckOutDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CheckInTimeLabel)
                     .addComponent(Search))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Wifi)
                             .addComponent(AC)
-                            .addComponent(CompBF)
-                            .addComponent(MaxPriceLabel))
+                            .addComponent(CompBF))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CarRental)
                             .addComponent(Pool)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(MaxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(MaxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(MaxPriceLabel)))
                 .addGap(18, 18, 18)
                 .addComponent(HotelsScrollArea, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -326,16 +328,53 @@ public class BookingArea extends javax.swing.JFrame {
     }//GEN-LAST:event_WifiActionPerformed
 
     private void BookNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookNowActionPerformed
-//        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
-//        String dateStr = CheckInDate.getDate().toString();
-//        DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
-//        Date date = (Date)formatter.parse(dateStr); 
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(date);
-//        String formatedDate = cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" +         cal.get(Calendar.YEAR);
-//        java.util.Date date1 = formater.parse(formatedDate);
-//        java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
-
+        int row = HotelsAvailable.getSelectedRow();
+        if(row < 0){
+            JOptionPane.showMessageDialog(null, "Please select a hotel.", "WARNING!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        model = (DefaultTableModel) HotelsAvailable.getModel();
+        int HID = (int) model.getValueAt(row, 0);
+        String Hotel = (String) model.getValueAt(row, 1);
+        int tariff = (int) model.getValueAt(row, 3);
+        String Address = (String) model.getValueAt(row, 2);
+        System.out.println(HID);
+        
+        //Checks if dates filled are valid well formed dates
+        Date inDate, outDate;
+        try{
+            inDate = convertDate(CheckInDate.getDate());
+            outDate = convertDate(CheckOutDate.getDate());
+        }catch(java.lang.ArrayIndexOutOfBoundsException | java.lang.NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Please fill in dates properly", "WARNING!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        //checks if check in/out dates are in the future and that chec_in date < check_out date
+        if(getDateDifference(outDate, inDate) < 0){
+            JOptionPane.showMessageDialog(null, "Your check-in date has to be before check out date", "WARNING!", JOptionPane.WARNING_MESSAGE); 
+            return;
+        }
+        if(getDateDifference(outDate, inDate) > 30)
+        {
+            JOptionPane.showMessageDialog(null, "You appear to be making a booking for greater than 30 days. Our corporate policy allows bookings upto only 30 days.", "WARNING!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try{
+            ResultSet rs = getResult("SELECT CURDATE();");
+            rs.next();            
+            Date today = rs.getDate("CURDATE()");
+            if(getDateDifference(inDate, today) < 0){
+                JOptionPane.showMessageDialog(null, "Your check in date can't be in the past mate.", "WARNING!", JOptionPane.WARNING_MESSAGE); 
+                return;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        this.dispose();
+        new BookingConfirmation(HID, Hotel, Address, (String) City.getSelectedItem(), tariff, inDate, outDate).setVisible(true);
+        return;        
     }//GEN-LAST:event_BookNowActionPerformed
 
     /**
