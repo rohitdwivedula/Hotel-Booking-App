@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import static app.DBConnection.getResult;
+import javax.swing.UIManager;
 /**
  *
  * @author vamsi
@@ -158,10 +159,15 @@ public class Login extends javax.swing.JFrame {
        if(validate_login(user,pwd))
        {
            JOptionPane.showMessageDialog(null, "Correct Login Credentials");  
-          try{
-            this.setVisible(false);
-        UserProfile pro=new UserProfile();
-        pro.setVisible(true);
+         try{
+            this.dispose();
+            try{
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+            new BookingArea(user).setVisible(true);
         }
         catch(Exception e)
         {
@@ -204,7 +210,7 @@ private boolean validate_login(String username,String password) {
         finalusername=username;
         //System.out.println(finalusername);
         return true;
-       }  
+       }
        else
            return false;            
      }

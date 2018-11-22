@@ -5,17 +5,11 @@
  */
 package app;
 
-import static app.Utilities.checkAvailability;
+import static app.Utilities.*;
 import static app.DBConnection.*;
-import static app.Login.finalusername;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import static  java.awt.Image.SCALE_SMOOTH;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,14 +19,16 @@ import javax.swing.JOptionPane;
  */
 public class BookingConfirmation extends javax.swing.JFrame {
 //            Wifi_img.setIcon(new javax.swing.ImageIcon(getClass().getResource(WiFi)).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-    int HID, tariff, number_of_rooms, rooms_to_book = 1;
+    int HID, tariff, number_of_rooms, rooms_to_book = 1,days;
     Date checkIn, checkOut;
     String hotel_name, Address, Description, City;
     String image;
     String WiFi, Car_Rental, AC, Swimming_Pool, Comp_BF;
+    static String username;
     static String yes = "/home/rohit/Desktop/Hotel-Booking-App/App/media/Yes.png";
     static String no = "/home/rohit/Desktop/Hotel-Booking-App/App/media/No.png";
-    BookingConfirmation(int HID, String Hotel, String Address, String City, int tariff, Date inDate, Date outDate) {
+    BookingConfirmation(String username, int HID, String Hotel, String Address, String City, int tariff, Date inDate, Date outDate) {
+        this.username = username;
         this.HID = HID;
         this.checkIn = inDate;
         this.checkOut = outDate;
@@ -40,11 +36,12 @@ public class BookingConfirmation extends javax.swing.JFrame {
         this.hotel_name = Hotel;
         this.Address = Address;
         this.City = City;
+        days = getDateDifference(checkOut, checkIn) + 1;
         image = "/home/rohit/Desktop/Hotel-Booking-App/App/media/";
         if(HID%3 == 0){
             Description = "Located in close proximity of the Airport and Bus Stand,  " + Hotel + " offers you premium rooms at extremely affordable rates. ";
             Description += "Book your room today, and leave your stay on us!\n";
-            Description += "Address: ";
+            Description += "\nAddress: ";
             Description += Address;
             image += "0.jpg";
         }
@@ -60,7 +57,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
             Description = "Home away from home.";
             Description += "We believe that your stay should be as comfortable as your home. And we deliver.";
             Description += "With personalised 24/7 service that is unparallelled elsewhere";
-            Description += ("\nAddress: " + Address);
+            Description += ("\n\nAddress: " + Address);
             image += "2.jpg";
         }
         ResultSet rs = getResult("SELECT WiFi, Car_Rental, AC, Swimming_Pool, Comp_BF, Number_of_rooms FROM room_info WHERE Hotel_ID = " + HID + ";");
@@ -124,17 +121,19 @@ public class BookingConfirmation extends javax.swing.JFrame {
         AC_img = new javax.swing.JLabel();
         CarRental_img = new javax.swing.JLabel();
         AmenitiesLabel = new javax.swing.JLabel();
-        GuestsLabel = new javax.swing.JLabel();
         GuestsNumberDisclaimer = new javax.swing.JLabel();
         TnC = new javax.swing.JLabel();
         NumberOfRoomsLabel = new javax.swing.JLabel();
-        username = new javax.swing.JLabel();
+        usernameDisplayLabel = new javax.swing.JLabel();
         IDType = new javax.swing.JComboBox<>();
         EnterIDNumLabel = new javax.swing.JLabel();
         IDNumber = new javax.swing.JTextField();
         CheckOutDateLabel = new javax.swing.JLabel();
         RoomsAvailableInHotel = new javax.swing.JLabel();
         CheckInDateLabel = new javax.swing.JLabel();
+        GoBack = new javax.swing.JButton();
+        TotalCost = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,6 +155,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
         DetailsAboutHotel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(DetailsAboutHotel);
 
+        NumberOfGuests.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         NumberOfGuests.setMajorTickSpacing(1);
         NumberOfGuests.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -198,15 +198,13 @@ public class BookingConfirmation extends javax.swing.JFrame {
         AmenitiesLabel.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         AmenitiesLabel.setText("Amenities");
 
-        GuestsLabel.setText("Number of Guests: " + NumberOfGuests.getValue());
-
         GuestsNumberDisclaimer.setText("* Three guests maximum per room");
 
         TnC.setText("By pressing confirm you agree to the Terms and Conditions.");
 
         NumberOfRoomsLabel.setText("Number of Rooms*: " + rooms_to_book);
 
-        username.setText("Username: "+ finalusername);
+        usernameDisplayLabel.setText("Username: " + username);
 
         IDType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aadhar Card", "Drivers Lisence", "Passport", "Voter ID Card", "Student ID Card" }));
         IDType.addItemListener(new java.awt.event.ItemListener() {
@@ -234,88 +232,104 @@ public class BookingConfirmation extends javax.swing.JFrame {
 
         CheckInDateLabel.setText("Check in: " + checkIn);
 
+        GoBack.setText("Back");
+        GoBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GoBackActionPerformed(evt);
+            }
+        });
+
+        TotalCost.setText("Total cost: Rs" + (rooms_to_book * tariff * days));
+
+        jLabel1.setText("Select Number of Guests:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(GoBack)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(TnC)
+                        .addGap(217, 217, 217))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(CompBF_img, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(NumberOfGuests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(178, 178, 178))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGap(51, 51, 51)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(TotalCost)
+                                                    .addComponent(NumberOfRoomsLabel))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(usernameDisplayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(EnterIDNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(IDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(IDType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(43, 43, 43)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Comp_BFLabel))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(RoomsAvailableInHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(CheckOutDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(CheckInDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(12, 12, 12)
-                                                .addComponent(Pool_img, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(SwimmingPoolLabel))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(Wifi_img, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(WiFiLabel)
-                                                .addGap(48, 48, 48)
-                                                .addComponent(AC_img, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(ACLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(28, 28, 28)
-                                                .addComponent(CarRental_img, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(CarRentalLabel))))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(HotelName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(264, 264, 264)
-                                .addComponent(AmenitiesLabel))))
-                    .addComponent(GuestsNumberDisclaimer)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(509, 509, 509)
-                        .addComponent(ConfirmButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(CompBF_img, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(36, 36, 36)
-                                            .addComponent(GuestsLabel))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(NumberOfGuests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(178, 178, 178)))
+                                                .addGap(43, 43, 43)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGap(12, 12, 12)
+                                                        .addComponent(Pool_img, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(SwimmingPoolLabel))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(Wifi_img, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(WiFiLabel)
+                                                        .addGap(48, 48, 48)
+                                                        .addComponent(AC_img, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(16, 16, 16)
+                                                        .addComponent(ACLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(CarRental_img, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(CarRentalLabel))))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(HotelName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addComponent(NumberOfRoomsLabel)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(EnterIDNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(IDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(IDType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGap(264, 264, 264)
+                                        .addComponent(AmenitiesLabel))))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Comp_BFLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(CheckInDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                                    .addComponent(CheckOutDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(RoomsAvailableInHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(34, 34, 34)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TnC)
-                .addGap(245, 245, 245))
+                                .addComponent(GuestsNumberDisclaimer)
+                                .addGap(282, 282, 282)
+                                .addComponent(ConfirmButton)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,7 +342,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AmenitiesLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -341,7 +355,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
                                 .addComponent(Pool_img, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ACLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ACLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(CarRental_img, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(11, 11, 11)
@@ -357,24 +371,26 @@ public class BookingConfirmation extends javax.swing.JFrame {
                                         .addGap(27, 27, 27)
                                         .addComponent(Comp_BFLabel))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addComponent(GoBack, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(GuestsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(NumberOfGuests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGap(18, 18, 18)
                         .addComponent(NumberOfRoomsLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(GuestsNumberDisclaimer)
-                        .addGap(64, 64, 64))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(TotalCost)
+                        .addGap(24, 24, 24)
+                        .addComponent(GuestsNumberDisclaimer))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(username)
+                                .addComponent(usernameDisplayLabel)
                                 .addGap(12, 12, 12)
                                 .addComponent(IDType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(3, 3, 3)
@@ -389,10 +405,10 @@ public class BookingConfirmation extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(RoomsAvailableInHotel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ConfirmButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TnC)
-                        .addContainerGap())))
+                        .addComponent(ConfirmButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TnC)
+                .addContainerGap())
         );
 
         pack();
@@ -423,7 +439,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
         query = "INSERT INTO booking_info VALUES (";
         query += booking_id;
         query += ",\"";
-        query += "bro";
+        query += username;
         query += "\", ";
         query += HID;
         query += ", ";
@@ -445,6 +461,14 @@ public class BookingConfirmation extends javax.swing.JFrame {
             rooms_waitlisted = total_rooms - rooms_confirmed;
             status = 1;
         }
+        rs = getResult("SELECT CURDATE()");
+        Date today = null;
+        try {
+            rs.next();
+            today = rs.getDate("CURDATE()");
+        } catch (SQLException ex) {
+            Logger.getLogger(BookingConfirmation.class.getName()).log(Level.SEVERE, null, ex);
+        }
         query += rooms_confirmed;
         query += ", ";
         query += rooms_waitlisted;
@@ -457,24 +481,30 @@ public class BookingConfirmation extends javax.swing.JFrame {
         query += "\", \"";
         query += ID_Number;
         query += "\", ";
-        query += status;  
+        query += status;
+        query+=", \"";
+        query += today;
+        query += "\", ";
+        query+= (tariff*rooms_to_book*days);
         query += ");";
         System.out.println(query);
         InsertRow(query);
         JOptionPane.showMessageDialog(null, "Your booking has been generated with booking ID" + booking_id, "Booking received." , JOptionPane.ERROR_MESSAGE); 
+        this.dispose();
+        new BookingArea(username).setVisible(true);
         return;
     }//GEN-LAST:event_ConfirmButtonActionPerformed
 
     private void NumberOfGuestsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_NumberOfGuestsStateChanged
         int n = NumberOfGuests.getValue();
-        GuestsLabel.setText("Number of guests: " + n);
         if(n%3 == 0){
             rooms_to_book = n/3;
         }
         else{
             rooms_to_book = (n/3) + 1;
         }
-        NumberOfRoomsLabel.setText("Number of Rooms*: " + rooms_to_book);        
+        NumberOfRoomsLabel.setText("Number of Rooms*: " + rooms_to_book); 
+        TotalCost.setText("Total cost: Rs" + (rooms_to_book * tariff * days));
     }//GEN-LAST:event_NumberOfGuestsStateChanged
 
     private void IDNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDNumberActionPerformed
@@ -488,6 +518,12 @@ public class BookingConfirmation extends javax.swing.JFrame {
     private void IDTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_IDTypeActionPerformed
+
+    private void GoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackActionPerformed
+        this.dispose();
+        BookingArea makeBooking = new BookingArea(username);
+        makeBooking.setVisible(true);
+    }//GEN-LAST:event_GoBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -536,7 +572,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
     private javax.swing.JButton ConfirmButton;
     private javax.swing.JTextArea DetailsAboutHotel;
     private javax.swing.JLabel EnterIDNumLabel;
-    private javax.swing.JLabel GuestsLabel;
+    private javax.swing.JButton GoBack;
     private javax.swing.JLabel GuestsNumberDisclaimer;
     private javax.swing.JLabel HotelName;
     private javax.swing.JTextField IDNumber;
@@ -548,9 +584,11 @@ public class BookingConfirmation extends javax.swing.JFrame {
     private javax.swing.JLabel RoomsAvailableInHotel;
     private javax.swing.JLabel SwimmingPoolLabel;
     private javax.swing.JLabel TnC;
+    private javax.swing.JLabel TotalCost;
     private javax.swing.JLabel WiFiLabel;
     private javax.swing.JLabel Wifi_img;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel username;
+    private javax.swing.JLabel usernameDisplayLabel;
     // End of variables declaration//GEN-END:variables
 }

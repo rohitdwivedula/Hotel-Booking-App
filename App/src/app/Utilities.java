@@ -61,7 +61,7 @@ public class Utilities {
             days[i] = 0;
         }
         ResultSet rs;
-        String query = "SELECT rooms_confirmed, Date_In,Date_Out  FROM booking_info WHERE (Status=0 OR STATUS = 1) AND Hotel_ID = " + HID;
+        String query = "SELECT rooms_confirmed, Date_In,Date_Out FROM booking_info WHERE (Status=0 OR STATUS = 1) AND Hotel_ID = " + HID;
         System.out.println(query);
         try{
             //CASE 1
@@ -112,7 +112,6 @@ public class Utilities {
         }catch(SQLException e){
             e.printStackTrace();
         }
-        
         int rooms = days[0];
         for(int i=0;i<=n;i++){
             System.out.print(days[i] + " ");
@@ -120,12 +119,13 @@ public class Utilities {
                 rooms = days[i];
         }
         rs = getResult("SELECT Number_of_rooms FROM room_info WHERE Hotel_ID = " + HID +";");
+        int return_val = 0;
         try {
             rs.next();
-            rooms = rs.getInt("Number_of_rooms") - rooms;
+            return_val = (int) rs.getInt("Number_of_rooms") - rooms;
         } catch (SQLException ex) {
             Logger.getLogger(Utilities.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return rooms;
+        return return_val;
     }
 }

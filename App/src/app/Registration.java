@@ -1,6 +1,7 @@
 package app;
 
-import static app.DBConnection.getResult;
+import static app.DBConnection.*;
+import static app.Utilities.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -249,14 +250,11 @@ public class Emailvalidator {
 }
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
         try {
-            Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app?zeroDateTimeBehavior=convertToNull","root","test");
             String username = UsernameTxt.getText();
             SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
             String dateStr =DOB.getDate().toString();
             DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
             Date date = (Date)formatter.parse(dateStr);    
-
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             String formatedDate = cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" +         cal.get(Calendar.YEAR);
@@ -268,6 +266,11 @@ public class Emailvalidator {
             String pwd2 = String.copyValueOf(pass2);
             Emailvalidator emailValidator = new Emailvalidator();
             String email = EmailTxt.getText();
+            
+            ResultSet rs = getResult("SELECT CURDATE();");
+            rs.next();            
+            java.sql.Date today = rs.getDate("CURDATE()");
+            
             if(FirstNameTxt.getText().length()==0 || LastNameTxt.getText().length()==0 || UsernameTxt.getText().length()==0 || AddressTxt.getText().length()==0 || EmailTxt.getText().length()==0 || dateStr.length()==0)  // Checking for empty field
       JOptionPane.showMessageDialog(null, "Empty fields detected ! Please fill up all fields");
             else if(CheckUsernameExists(username))
@@ -282,23 +285,23 @@ public class Emailvalidator {
             {
                 JOptionPane.showMessageDialog(null,"Enter a valid email id.");
             }
+            else if(getDateDifference(today, convertDate(date1)) < 4745){
+                JOptionPane.showMessageDialog(null, "According to Indian CyberLaw, you must be atleast 13 years old to use this service");
+            }
             else
             {
                 String address = AddressTxt.getText();
                 String firstname = FirstNameTxt.getText();
                 String lastname = LastNameTxt.getText();
                 String password = pwd1;
-                String query = " insert into user_info (username, firstname, lastname, password,DOB, address,email)"
-        + " values (?, ?, ?, ?, ?,?,?)";
-                PreparedStatement preparedStmt = conn.prepareStatement(query);
-                preparedStmt.setString (1, username);
-                preparedStmt.setString (2, firstname);
-                preparedStmt.setString (3, lastname);
-                preparedStmt.setString (4, password);
-                preparedStmt.setDate (5, sqlDate);
-                preparedStmt.setString (6, address);
-                preparedStmt.setString (7, email);
-                preparedStmt.execute();
+                String query = 
+                        
+                        
+                        
+                        
+                        "INSERT INTO user_info (username, firstname, lastname, password, DOB, address,email) VALUES(\"" + username + "\",\"" + firstname + "\",\"" +  lastname + "\",\"" + password + "\",\"" + sqlDate + "\",\"" + address + "\",\"" + email + "\")";
+                System.out.println(query);
+                InsertRow(query);
                 JOptionPane.showMessageDialog(null,"Successfully registered.");
                 this.dispose();
                 new Login().setVisible(true);
@@ -403,7 +406,6 @@ public class Emailvalidator {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Registration().setVisible(true);
             }
         });
     }

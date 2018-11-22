@@ -24,13 +24,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BookingArea extends javax.swing.JFrame {
 
-    
+    String username;
     DefaultTableModel model;
     /**
      * Creates new form BookingArea
      */
-    public BookingArea() {
-        initComponents();
+    public BookingArea(String username) {
+        this.username = username;
+        initComponents();        
     }
     
     private String[] getCityList(){
@@ -80,8 +81,24 @@ public class BookingArea extends javax.swing.JFrame {
                 String hotel = RSet.getString("Hotel_Name");
                 String address = RSet.getString("Address");
                 int tariff = RSet.getInt("Tariff");
-                int rating  = 0;
-                Object row[] = {HID, hotel, address, tariff, rating};
+                
+                
+                int rating = 0;
+                int num_of_ratings = 0;
+                float final_rating = 0;
+                ResultSet a = getResult("SELECT rating from hotel_reviews WHERE Hotel_ID = " + HID + ";");
+                while(a.next()){
+                    rating += a.getInt("rating");
+                    num_of_ratings++;
+                }
+                if(num_of_ratings != 0)
+                    final_rating = (float) ((1.00 * rating)/num_of_ratings);
+                else{
+                    rating = 0;
+                    num_of_ratings = 0;
+                }
+                String RatingToDisplay = "" + final_rating + "(" + num_of_ratings + ")";
+                Object row[] = {HID, hotel, address, tariff, RatingToDisplay};
                 model.addRow(row);
             }
         }catch (SQLException ex) {
@@ -113,6 +130,7 @@ public class BookingArea extends javax.swing.JFrame {
         MaxPrice = new javax.swing.JSlider(50, 99000, 15000);
         MaxPriceLabel = new javax.swing.JLabel();
         BookNow = new javax.swing.JButton();
+        myAccount = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -205,6 +223,14 @@ public class BookingArea extends javax.swing.JFrame {
             }
         });
 
+        myAccount.setBackground(new java.awt.Color(240, 242, 242));
+        myAccount.setText("u:" + username);
+        myAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myAccountActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,11 +281,15 @@ public class BookingArea extends javax.swing.JFrame {
                 .addGap(335, 335, 335)
                 .addComponent(BookNow)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(myAccount)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addComponent(myAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(City, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CheckInDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -373,9 +403,14 @@ public class BookingArea extends javax.swing.JFrame {
         }
         
         this.dispose();
-        new BookingConfirmation(HID, Hotel, Address, (String) City.getSelectedItem(), tariff, inDate, outDate).setVisible(true);
+        new BookingConfirmation(username, HID, Hotel, Address, (String) City.getSelectedItem(), tariff, inDate, outDate).setVisible(true);
         return;        
     }//GEN-LAST:event_BookNowActionPerformed
+
+    private void myAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAccountActionPerformed
+        this.dispose();
+        new UserProfile(username).setVisible(true);
+    }//GEN-LAST:event_myAccountActionPerformed
 
     /**
      * @param args the command line arguments
@@ -407,7 +442,7 @@ public class BookingArea extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BookingArea().setVisible(true);
+                new BookingArea("abc").setVisible(true);
             }
         });
     }
@@ -429,5 +464,6 @@ public class BookingArea extends javax.swing.JFrame {
     private javax.swing.JCheckBox Pool;
     private javax.swing.JButton Search;
     private javax.swing.JCheckBox Wifi;
+    private javax.swing.JButton myAccount;
     // End of variables declaration//GEN-END:variables
 }

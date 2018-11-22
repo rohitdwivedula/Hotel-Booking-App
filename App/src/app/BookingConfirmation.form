@@ -23,111 +23,119 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="GoBack" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="Image" min="-2" pref="389" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                              <Component id="Pool_img" min="-2" pref="49" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="SwimmingPoolLabel" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="Wifi_img" min="-2" pref="50" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="WiFiLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                                              <Component id="AC_img" min="-2" pref="47" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="ACLabel" min="-2" pref="56" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                              <Component id="CarRental_img" min="-2" pref="51" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="CarRentalLabel" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="HotelName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane1" alignment="0" pref="569" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="264" max="-2" attributes="0"/>
-                              <Component id="AmenitiesLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Component id="GuestsNumberDisclaimer" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="509" max="-2" attributes="0"/>
-                      <Component id="ConfirmButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="TnC" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="CompBF_img" min="-2" pref="51" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                          <Component id="GuestsLabel" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="CompBF_img" min="-2" pref="51" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="NumberOfGuests" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="178" pref="178" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="TotalCost" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="NumberOfRoomsLabel" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="NumberOfGuests" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="usernameDisplayLabel" min="-2" pref="316" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="EnterIDNumLabel" min="-2" pref="207" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="IDNumber" min="-2" pref="128" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="IDType" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="Comp_BFLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="RoomsAvailableInHotel" min="-2" pref="176" max="-2" attributes="0"/>
+                                          <Component id="CheckOutDateLabel" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
+                                          <Component id="CheckInDateLabel" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="Image" min="-2" pref="389" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                                      <Component id="Pool_img" min="-2" pref="49" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="SwimmingPoolLabel" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="Wifi_img" min="-2" pref="50" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="WiFiLabel" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                                      <Component id="AC_img" min="-2" pref="47" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                                      <Component id="ACLabel" min="-2" pref="56" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="CarRental_img" min="-2" pref="51" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="CarRentalLabel" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="HotelName" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jScrollPane1" alignment="0" pref="569" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Component id="NumberOfRoomsLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="264" max="-2" attributes="0"/>
+                                      <Component id="AmenitiesLabel" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="username" min="-2" pref="316" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="EnterIDNumLabel" min="-2" pref="207" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="IDNumber" min="-2" pref="128" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="IDType" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Comp_BFLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="CheckInDateLabel" pref="128" max="32767" attributes="0"/>
-                                  <Component id="CheckOutDateLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="RoomsAvailableInHotel" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="GuestsNumberDisclaimer" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
+                              <Component id="ConfirmButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="TnC" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -142,7 +150,7 @@
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="AmenitiesLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="12" max="32767" attributes="0"/>
+                      <EmptySpace pref="10" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -158,7 +166,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="ACLabel" min="-2" pref="48" max="-2" attributes="0"/>
+                                  <Component id="ACLabel" alignment="1" min="-2" pref="48" max="-2" attributes="0"/>
                                   <Component id="CarRental_img" min="-2" pref="48" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
@@ -183,27 +191,29 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="GoBack" min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="Image" min="-2" pref="247" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="GuestsLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="NumberOfGuests" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="NumberOfRoomsLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="TotalCost" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="GuestsNumberDisclaimer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="username" min="-2" max="-2" attributes="0"/>
+                              <Component id="usernameDisplayLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Component id="IDType" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
@@ -223,11 +233,11 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="ConfirmButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TnC" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="TnC" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -282,6 +292,9 @@
     </Container>
     <Component class="javax.swing.JSlider" name="NumberOfGuests">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="14" style="0"/>
+        </Property>
         <Property name="majorTickSpacing" type="int" value="1"/>
       </Properties>
       <Events>
@@ -382,13 +395,6 @@
         <Property name="text" type="java.lang.String" value="Amenities"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="GuestsLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="&quot;Number of Guests: &quot; + NumberOfGuests.getValue()" type="code"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="GuestsNumberDisclaimer">
       <Properties>
         <Property name="text" type="java.lang.String" value="* Three guests maximum per room"/>
@@ -406,10 +412,10 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="username">
+    <Component class="javax.swing.JLabel" name="usernameDisplayLabel">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="&quot;Username: &quot;+ finalusername" type="code"/>
+          <Connection code="&quot;Username: &quot; + username" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -458,6 +464,26 @@
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="&quot;Check in: &quot; + checkIn" type="code"/>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="GoBack">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Back"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GoBackActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="TotalCost">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;Total cost: Rs&quot; + (rooms_to_book * tariff * days)" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Select Number of Guests:"/>
       </Properties>
     </Component>
   </SubComponents>

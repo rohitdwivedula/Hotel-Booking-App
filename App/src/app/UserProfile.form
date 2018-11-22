@@ -26,28 +26,39 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="224" max="-2" attributes="0"/>
                               <Component id="welcome" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="Username" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="CheckBookings" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+                              <Component id="BookingAreaGo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                               <Component id="Cancel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="Modify" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="Rating" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="RatingOption" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                      <Component id="Modify" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
+              <Component id="CheckBookings" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,23 +70,19 @@
                   <Component id="welcome" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Username" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="CheckBookings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Cancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Modify" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <Component id="CheckBookings" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="218" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Modify" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Cancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BookingAreaGo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="RatingOption" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Rating" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Component id="jScrollPane1" min="-2" pref="181" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,7 +96,7 @@
     <Component class="javax.swing.JLabel" name="Username">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="finalusername" type="code"/>
+          <Connection code="username" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -102,6 +109,9 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="Bookings">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Noto Sans CJK JP Bold" size="12" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="7" rowCount="0">
                 <Column editable="false" title="Booking ID" type="java.lang.Object"/>
@@ -152,6 +162,7 @@
                 </Column>
               </TableColumnModel>
             </Property>
+            <Property name="rowHeight" type="int" value="50"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
@@ -178,6 +189,30 @@
     <Component class="javax.swing.JButton" name="Modify">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modify"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ModifyActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BookingAreaGo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="New Booking"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BookingAreaGoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="RatingOption">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Give Rating"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RatingOptionActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="Rating">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
       </Properties>
     </Component>
   </SubComponents>

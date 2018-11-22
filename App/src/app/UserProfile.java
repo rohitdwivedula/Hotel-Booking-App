@@ -12,9 +12,9 @@ Validity of a booking
 2 for cancelled
 */
 
-import static app.Utilities.checkAvailability;
+import static app.DBConnection.InsertRow;
+import static app.Utilities.*;
 import static app.DBConnection.getResult;
-import static app.Login.finalusername;
 import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,11 +23,14 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Set;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -39,36 +42,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class UserProfile extends javax.swing.JFrame {
 
+    static String username;
     /**
      * Creates new form UserProfile
      */
-    public UserProfile() {
+    public UserProfile(String username) {
+        this.username = username;
         initComponents();
     }
     DefaultTableModel model;
-    
-//    private void list()
-//    {
-//        String query="SELECT * FROM booking_info WHERE username=\""+finalusername+"\"";
-//        ResultSet RSet = getResult(query);
-//        int i=0;
-//        model = (DefaultTableModel) Bookings.getModel();
-//        model.setRowCount(0);
-//        try {
-//            while(RSet.next()){
-//                String bid = RSet.getString("Booking_ID");
-//                int roomconf = RSet.getInt("rooms_confirmed");
-//                int roomwait = RSet.getInt("rooms_waitlist");
-//                java.sql.Date datein=RSet.getDate("Date_In");
-//                java.sql.Date dateout=RSet.getDate("Date_Out");
-//                int status=RSet.getInt("Status");
-//                Object row[] = {bid,roomconf,roomwait,datein,dateout,status};
-//                model.addRow(row);
-//            }
-//        }catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+   
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,13 +69,17 @@ public class UserProfile extends javax.swing.JFrame {
         CheckBookings = new javax.swing.JButton();
         Cancel = new javax.swing.JButton();
         Modify = new javax.swing.JButton();
+        BookingAreaGo = new javax.swing.JButton();
+        RatingOption = new javax.swing.JButton();
+        Rating = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         welcome.setText("Welcome");
 
-        Username.setText(finalusername);
+        Username.setText(username);
 
+        Bookings.setFont(new java.awt.Font("Noto Sans CJK JP Bold", 0, 12)); // NOI18N
         Bookings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -109,6 +96,7 @@ public class UserProfile extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Bookings.setRowHeight(50);
         jScrollPane1.setViewportView(Bookings);
 
         CheckBookings.setText("Check Bookings");
@@ -126,6 +114,27 @@ public class UserProfile extends javax.swing.JFrame {
         });
 
         Modify.setText("Modify");
+        Modify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModifyActionPerformed(evt);
+            }
+        });
+
+        BookingAreaGo.setText("New Booking");
+        BookingAreaGo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingAreaGoActionPerformed(evt);
+            }
+        });
+
+        RatingOption.setText("Give Rating");
+        RatingOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RatingOptionActionPerformed(evt);
+            }
+        });
+
+        Rating.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,23 +143,32 @@ public class UserProfile extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1)
+                        .addGap(12, 12, 12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(210, 210, 210)
+                                .addGap(224, 224, 224)
                                 .addComponent(welcome)
-                                .addGap(132, 132, 132)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(Username))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(CheckBookings)
+                                .addGap(125, 125, 125)
+                                .addComponent(BookingAreaGo)
+                                .addGap(46, 46, 46)
+                                .addComponent(Cancel)
+                                .addGap(45, 45, 45)
+                                .addComponent(Modify)
+                                .addGap(18, 18, 18)
+                                .addComponent(Rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Cancel)))
-                        .addGap(53, 53, 53)
-                        .addComponent(Modify)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)))
-                .addGap(12, 12, 12))
+                                .addComponent(RatingOption)))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(273, 273, 273)
+                .addComponent(CheckBookings)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,26 +177,25 @@ public class UserProfile extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(welcome)
                     .addComponent(Username))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CheckBookings)
-                        .addGap(65, 65, 65))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Cancel)
-                            .addComponent(Modify))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(164, 164, 164))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(CheckBookings)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Modify)
+                    .addComponent(Cancel)
+                    .addComponent(BookingAreaGo)
+                    .addComponent(RatingOption)
+                    .addComponent(Rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(70, 70, 70))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void CheckBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBookingsActionPerformed
-        String query="SELECT * FROM booking_info WHERE username=\""+finalusername+"\"";
+        String query="SELECT * FROM booking_info WHERE username=\""+username+"\"";
         ResultSet RSet = getResult(query);
         int i=0;
         model = (DefaultTableModel) Bookings.getModel();
@@ -217,53 +234,59 @@ public class UserProfile extends javax.swing.JFrame {
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         
         try{
-        // Change to Cancelled    
-        Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_booking_app?zeroDateTimeBehavior=convertToNull","root","test");
+        // Change Status to Cancelled    
+        model = (DefaultTableModel) Bookings.getModel();
         int rowIndex = Bookings.getSelectedRow();
         int bookid= (int) model.getValueAt(rowIndex, 0);
-        int hid1=(int) model.getValueAt(rowIndex,6);
+        int hid=(int) model.getValueAt(rowIndex,6);
         java.sql.Date datein=(java.sql.Date) model.getValueAt(rowIndex,3);
         java.sql.Date dateout=(java.sql.Date) model.getValueAt(rowIndex,4);
-        int status1= 2;
-        String query1="update booking_info set Status=\""+status1+"\"";
-        query1+="where Booking_ID=\""+bookid+"\"";
-        PreparedStatement preparedStmt = conn.prepareStatement(query1);
-        preparedStmt.execute();
-        
+        InsertRow("UPDATE booking_info SET Status=2 WHERE Booking_ID=\""+bookid+"\";");
         // Waitlist Implementation
         //int avail=checkAvailiability(hid1,datein,dateout);
-        int avail=4;
-        String query2="SELECT * FROM booking_info where Status=1 order by Booking_ID asc";
-        ResultSet rs2=getResult(query2);
-        while(rs2.next())
-        {
-            int wlrooms=rs2.getInt("rooms_waitlist");
-            if(avail>0 && wlrooms<avail)
-            {
-                int bookedid=rs2.getInt("Booking_ID");
-                
-                int status2= 0;
-                String query3="update booking_info set Status=\""+status2+"\"";
-                query3+="where Booking_ID=\""+bookedid+"\"";
-                PreparedStatement preparedStmt2 = conn.prepareStatement(query3);
-                preparedStmt.execute();
-                int confrooms=rs2.getInt("rooms_confirmed");
-                confrooms=confrooms+wlrooms;
-                String query4="update booking_info set rooms_confirmed=\""+confrooms+"\"";
-                query4+="where Booking_ID=\""+bookedid+"\"";
-                PreparedStatement preparedStmt3 = conn.prepareStatement(query4);
-                preparedStmt3.execute();
-                avail=avail-wlrooms;
-                wlrooms=0;
-                String query5="update booking_info set rooms_waitlist=\""+wlrooms+"\"";
-                query5+="where Booking_ID=\""+bookedid+"\"";
-                PreparedStatement preparedStmt4 = conn.prepareStatement(query5);
-                preparedStmt4.execute();              
-                avail=avail-wlrooms;
+        ResultSet rs = getResult("SELECT CURDATE()");
+        rs.next();
+        Date today = rs.getDate("CURDATE()");
+        int setFlag = 0;
+        if(getDateDifference(datein, today) < 3){
+             setFlag = 1;
         }
+        String query = "SELECT * FROM booking_info where Status=1 AND Hotel_ID = " + hid +  " ORDER BY Booking_ID ASC";
+        ResultSet rs2=getResult(query);
         
-        
+        while(rs2.next()){
+            int bid = rs2.getInt("Booking_ID");
+            int wlrooms=rs2.getInt("rooms_waitlist");
+            int cnfrooms = rs2.getInt("rooms_confirmed");
+            Date date_in = rs2.getDate("Date_In");
+            Date date_out = rs2.getDate("Date_Out");
+            try{
+            rs = getResult("SELECT CURDATE();");
+            rs.next();            
+            today = rs.getDate("CURDATE()");
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+            int rooms_available = (int) (checkAvailability(hid, date_in, date_out));
+            if(rooms_available > 0){
+                if(rooms_available > wlrooms){
+                    cnfrooms += wlrooms;
+                    wlrooms = 0;
+                }
+                if(rooms_available == wlrooms){
+                    wlrooms = 0;
+                    cnfrooms += rooms_available;
+                }
+                else{
+                    wlrooms -= rooms_available;
+                    cnfrooms += rooms_available;
+                }
+                InsertRow("UPDATE booking_info SET rooms_confirmed = " + cnfrooms + " WHERE Booking_ID= "+bid+";");
+                InsertRow("UPDATE booking_info SET rooms_waitlist = " + wlrooms + " WHERE Booking_ID= "+bid+";");
+            }        
+            if(setFlag == 1){
+                  JOptionPane.showMessageDialog(null, "Cancellation fee of 50% has been levied as you're booking within 3 days.", "WARNING!", JOptionPane.WARNING_MESSAGE);
+            }
         }
         }catch(Exception e)
         {
@@ -272,6 +295,55 @@ public class UserProfile extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_CancelActionPerformed
+
+    private void BookingAreaGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingAreaGoActionPerformed
+        this.dispose();
+        new BookingArea(username).setVisible(true);
+    }//GEN-LAST:event_BookingAreaGoActionPerformed
+
+    private void ModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyActionPerformed
+        try {
+            int rowIndex = Bookings.getSelectedRow();
+            model = (DefaultTableModel) Bookings.getModel();
+            int bookingID = (int) model.getValueAt(rowIndex, 0);
+            java.sql.Date datein=(java.sql.Date) model.getValueAt(rowIndex,3);
+            java.sql.Date dateout=(java.sql.Date) model.getValueAt(rowIndex,4);
+            ResultSet rs = getResult("SELECT CURDATE()");
+            rs.next();
+            Date today = rs.getDate("CURDATE()");
+            if(getDateDifference(datein, today) < 3){
+                JOptionPane.showMessageDialog(null, "You cannot modify now.", "WARNING!", JOptionPane.WARNING_MESSAGE);
+                return;
+            }         
+            new ModifyBooking(username, bookingID).setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ModifyActionPerformed
+
+    private void RatingOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RatingOptionActionPerformed
+        try {
+            // TODO add your handling code here:
+            int rowIndex = Bookings.getSelectedRow();
+            model = (DefaultTableModel) Bookings.getModel();
+            int bookingID = (int) model.getValueAt(rowIndex, 0);
+            int rating = Integer.parseInt(Rating.getText());
+            ResultSet rs = getResult("SELECT Hotel_ID from booking_info WHERE Booking_ID = " + bookingID + ";");            
+            rs.next();
+            int hid = rs.getInt("Hotel_ID");
+            String query = "SELECT MAX(review_id) FROM hotel_reviews;";
+            rs = getResult(query);
+            rs.next();
+            int cid = (int) rs.getInt("MAX(review_id)") + 1;
+            query = "INSERT INTO hotel_reviews VALUES(" + cid + ", \"" + username + "\", " + hid + ", " + rating +");"; 
+            InsertRow(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+                
+    }//GEN-LAST:event_RatingOptionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,7 +375,7 @@ public class UserProfile extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UserProfile up=new UserProfile();
+                UserProfile up=new UserProfile(username);
                 up.setVisible(true);
                 //up.function();
                 
@@ -313,10 +385,13 @@ public class UserProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BookingAreaGo;
     private javax.swing.JTable Bookings;
     private javax.swing.JButton Cancel;
     private javax.swing.JButton CheckBookings;
     private javax.swing.JButton Modify;
+    private javax.swing.JTextField Rating;
+    private javax.swing.JButton RatingOption;
     private javax.swing.JLabel Username;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel welcome;

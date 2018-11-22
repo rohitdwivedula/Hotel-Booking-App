@@ -28,17 +28,7 @@ public class Application {
         catch(Exception e){
             e.printStackTrace();
         }
-        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-        Date DateIn = null, DateOut = null;
-        try{
-            DateIn = (Date) convertDate(sdf1.parse("23-11-2018"));
-            DateOut = (Date) convertDate(sdf1.parse("23-11-2018"));
-        }catch(ParseException ex){
-            ex.printStackTrace();
-        }
-        System.out.println(getDateDifference(DateOut, DateIn));
-        System.out.println("LOL: " + checkAvailability(1, DateIn, DateOut));
-//        new Login().setVisible(true);
+        new Login().setVisible(true);
     }
     
 }
